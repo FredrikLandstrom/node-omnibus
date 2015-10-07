@@ -4,15 +4,15 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
 
 > '[IBM Tivoli Netcool OMNIbus](http://www.ibm.com/software/products/ibmtivolinetcoolomnibus) provides near real-time service assurance for business infrastructure, applications, servers, network devices and protocols, internet protocols, storage and security devices' (from ibm.com)
 
-##Installation
+## Installation
 ```bash
 npm intall node-omnibus --save
 ```
 
-##OMNIbus REST configuration
+## OMNIbus REST configuration
 [TODO]
 
-##Usage
+## Usage
 [TODO]
 
 ## Development
