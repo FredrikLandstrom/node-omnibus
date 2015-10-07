@@ -5,4 +5,4 @@ Client library for accessing IBM Tivoli Netcool/OMNIbus Objectserver database (R
 
 
 ##Trademark information
-IBM Tivoli Netcool OMNIbus are trademarks of International Business Machines Corporation, registered in many jurisdictions worldwide.
+IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Corporation, registered in many jurisdictions worldwide.
