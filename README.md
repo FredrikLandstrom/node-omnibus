@@ -10,6 +10,18 @@ npm intall node-omnibus --save
 ```
 
 ## OMNIbus REST configuration
+Open the propertiesfile for the Objectserver that should provide the REST interface
+```
+vi $OMNIHOME/etc/NCOMS.props
+```
+where NCOMS is the name of the Objectserver.
+Set the following parameters and restart the Objectserver
+```
+NRestOS.Enable: TRUE
+NHttpd.EnableHTTP: TRUE
+NHttpd.ListeningPort: 8080
+```
+
 
 ## Usage
 
