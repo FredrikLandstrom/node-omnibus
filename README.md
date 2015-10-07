@@ -37,7 +37,7 @@ This library is licensed under the [MIT License][license]
 If you encounter any bugs or other issues, please file them in the 
 [issue tracker][issue-tracker]
 
-##Trademark information
+## Trademark information
 IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Corporation, registered in many jurisdictions worldwide.
 
 
