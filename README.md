@@ -8,9 +8,13 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
 npm intall node-omnibus --save
 ```
 
-##Configure OMNIbus REST Interface for use with this library
+##OMNIbus REST configuration
+[TODO]
 
 ##Usage
+[TODO]
+
+## Development
 ```bash
 git clone git@github.com:fredriklandstrom/node-omnibus.git
 cd node-omnibus
@@ -23,9 +27,6 @@ To run the tests:
 ```bash
 npm test
 ```
-
-
-## Development
 
 ## Changelog
 See the [Changelog][changelog]
@@ -43,3 +44,4 @@ IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Cor
 
 [license]: LICENSE
 [issue-tracker]: https://github.com/fredriklandstrom/node-omnibus/issues
+[changelog]: CHANGELOG.md
