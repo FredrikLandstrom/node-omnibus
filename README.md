@@ -39,3 +39,7 @@ If you encounter any bugs or other issues, please file them in the
 
 ##Trademark information
 IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Corporation, registered in many jurisdictions worldwide.
+
+
+[license]: LICENSE
+[issue-tracker]: https://github.com/fredriklandstrom/node-omnibus/issues
