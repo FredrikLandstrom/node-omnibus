@@ -1,0 +1,36 @@
+{
+  "name": "node-omnibus",
+  "version": "0.0.1",
+  "description": "OMNIbus driver (REST API client) for Node.js",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FredrikLandstrom/node-omnibus.git"
+  },
+  "keywords": [
+    "tivoli",
+    "netcool",
+    "omnibus",
+    "rest",
+    "api"
+  ],
+  "author": "Fredrik Landström (fredrik.j.landstrom@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FredrikLandstrom/node-omnibus/issues"
+  },
+  "homepage": "https://github.com/FredrikLandstrom/node-omnibus",
+  "dependencies": {
+    "http-status": "^0.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3"
+  }
+}
