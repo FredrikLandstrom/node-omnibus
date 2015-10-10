@@ -28,8 +28,8 @@ var omnibus = require('node-omnibus');
 
 var omnibusConnection = omnibus.createConnection({
 	host  		: 'servername', 
-	port 		  : '8080',
-	user 		  : 'root', 
+	port 		: '8080',
+	user 		: 'root', 
 	password	: 'password'
 });
 
