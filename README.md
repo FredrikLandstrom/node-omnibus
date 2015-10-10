@@ -24,7 +24,24 @@ NHttpd.ListeningPort: 8080
 
 
 ## Usage
+```
+var omnibus = require('node-omnibus');
 
+var omnibusConnection = omnibus.createConnection({
+	host  		: 'servername', 
+	port 		  : '8080',
+	user 		  : 'root', 
+	password	: 'password'
+});
+
+// Create a query
+var query = 'SELECT Node,Serial from alerts.status order by Serial DESC';
+
+// Run Query
+omnibusConnection.query(query,function(err,rows,numrows,coldesc){
+	console.log(rows); // Returns JSON 
+});
+```
 ## Development
 ```
 git clone git@github.com:fredriklandstrom/node-omnibus.git
