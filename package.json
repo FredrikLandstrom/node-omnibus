@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/FredrikLandstrom/node-omnibus",
   "dependencies": {
-    "http-status": "^0.2.0"
+    "http-status": "^0.2.0",
+    "request": "^2.64.0"
   },
   "devDependencies": {
     "chai": "^3.3.0",
