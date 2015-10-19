@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/FredrikLandstrom/node-omnibus",
   "dependencies": {
+    "bluebird": "^2.10.2",
     "http-status": "^0.2.0",
     "request": "^2.64.0"
   },
