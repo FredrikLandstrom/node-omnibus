@@ -1,8 +1,18 @@
 {
   "name": "node-omnibus",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "OMNIbus driver (REST API client) for Node.js",
   "main": "index.js",
+  "contributors" : [
+  { 
+     "name": "Fredrik Landstrom",
+     "email": "fredrik.landstrom@compose.se"
+  },
+  {
+     "name": "Vuk Kadenic",
+     "email": "vuk.kadenic@compose.se"
+  }
+  ],
   "directories": {
     "test": "test"
   },
