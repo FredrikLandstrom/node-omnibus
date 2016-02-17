@@ -55,6 +55,11 @@ To run the tests:
 npm test
 ```
 
+## Contributors
+Fredrik Landström
+Vuk Kadenic
+
+
 ## Changelog
 See the [Changelog][changelog]
 
