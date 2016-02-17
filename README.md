@@ -55,9 +55,10 @@ To run the tests:
 npm test
 ```
 
-## Contributors
-Fredrik Landström
-Vuk Kadenic
+### Collaborators
+
+* [fredriklandstrom](https://github.com/fredriklandstrom) - **Fredrik Landström**
+* [vukkad-1](https://github.com/vukkad-1) - **Vuk Kadenic**
 
 
 ## Changelog
