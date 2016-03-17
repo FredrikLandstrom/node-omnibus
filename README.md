@@ -24,12 +24,13 @@ NHttpd.ListeningPort: 8080
 
 ## Usage
 ```
+//Use the variables below or input conf data to production_omn_mod.js configuration file
 var omnibus = require('node-omnibus');
 
 var omnibusConnection = omnibus.createConnection({
-	host  		: 'servername', 
+	host  		: 'servername',
 	port 		: '8080',
-	user 		: 'root', 
+	user 		: 'root',
 	password	: 'password'
 });
 
@@ -38,9 +39,16 @@ var query = 'SELECT Node,Serial from alerts.status order by Serial DESC';
 
 // Run Query
 omnibusConnection.query(query,function(err,rows,numrows,coldesc){
-	console.log(rows); // Returns JSON 
+	console.log(rows); // Returns JSON
 });
 ```
+### Send sql command
+...
+//Complete the above steps
+//Input sql command into production_omn_mod.js configuration file, then run:
+
+omnibusConnection.sqlCommand();
+...
 ## Development
 ```
 git clone git@github.com:fredriklandstrom/node-omnibus.git
@@ -48,7 +56,7 @@ cd node-omnibus
 npm install
 ```
 
-You need a local installation of IBM Tivoli Netcool OMNIbus (IBM commercial license) with the REST interface enabled as described above. 
+You need a local installation of IBM Tivoli Netcool OMNIbus (IBM commercial license) with the REST interface enabled as described above.
 
 To run the tests:
 ```
@@ -68,7 +76,7 @@ See the [Changelog][changelog]
 This library is licensed under the [MIT License][license]
 
 ## Feedback
-If you encounter any bugs or other issues, please file them in the 
+If you encounter any bugs or other issues, please file them in the
 [issue tracker][issue-tracker]
 
 ## Trademark information
