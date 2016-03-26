@@ -9,7 +9,7 @@ npm intall node-omnibus --save
 ```
 
 ## OMNIbus REST configuration
-Open the propertiesfile for the Objectserver that should provide the REST interface
+Open the propertyfile for the Objectserver that should provide the REST interface
 ```
 vi $OMNIHOME/etc/NCOMS.props
 ```
@@ -23,17 +23,20 @@ NHttpd.ListeningPort: 8080
 
 
 ## Usage
+
+### Creating the connection
 ```
-//Use the variables below or input conf data to production_omn_mod.js configuration file
 var omnibus = require('node-omnibus');
 
 var omnibusConnection = omnibus.createConnection({
-	host  		: 'servername',
-	port 		: '8080',
-	user 		: 'root',
+	host		: 'omnibusHostName',
+	port		: '8080',
+	user		: 'root',
 	password	: 'password'
 });
-
+```
+### SELECT Query
+```
 // Create a query
 var query = 'SELECT Node,Serial from alerts.status order by Serial DESC';
 
@@ -42,13 +45,52 @@ omnibusConnection.query(query,function(err,rows,numrows,coldesc){
 	console.log(rows); // Returns JSON
 });
 ```
-### Send sql command
-...
-//Complete the above steps
-//Input sql command into production_omn_mod.js configuration file, then run:
 
-omnibusConnection.sqlCommand();
-...
+### DELETE Query
+```
+// Create a query
+var query = 'DELETE from alerts.status where Severity = 1';
+
+// Run Query
+omnibusConnection.query(query,function(err,rows,numrows,coldesc){
+	console.log(rows); // Returns JSON
+});
+```
+
+### PATCH/UPDATE Query
+```
+// Create a query
+var query = 'UPDATE alerts.status set Node="Server01" where Node="Server01.domain.com"';
+
+// Run Query
+omnibusConnection.query(query,function(err,rows,numrows,coldesc){
+	console.log(rows); // Returns JSON
+});
+```
+
+### POST/INSERT Query
+```
+// Create a query
+var query = 'INSERT INTO alerts.status (Identifier, Node, Summary, Type) values ("Server01Injected","Server01", "New injected event", 2)';
+
+// Run Query
+omnibusConnection.query(query,function(err,rows,numrows,coldesc){
+	console.log(rows); // Returns JSON
+});
+```
+
+### Send SQL command to the SQLFactory
+Make sure the ending ";" is in the SQL command sent to the ObjectServer
+```
+// Prepare the command
+var sql = "delete user 'User1';";
+
+// Run the commandFactory
+omnibusConnection.sqlCommand(sql,function(err,rows,numrows,coldesc){
+	console.log(rows); // Returns JSON
+});
+```
+
 ## Development
 ```
 git clone git@github.com:fredriklandstrom/node-omnibus.git
