@@ -107,8 +107,8 @@ npm test
 
 ### Collaborators
 
-* [fredriklandstrom](https://github.com/fredriklandstrom) - **Fredrik Landström**
-* [vukkad-1](https://github.com/vukkad-1) - **Vuk Kadenic**
+* [fredriklandstrom](https://github.com/fredriklandstrom) - **Fredrik Landström**, Load System
+* [vukkad-1](https://github.com/vukkad-1) - **Vuk Kadenic**, Compose IT
 
 
 ## Changelog
