@@ -11,3 +11,4 @@
 ## Version 0.2.0 - October 4, 2016
 * SQL Factory functions update (UPDATE, INSERT, DELETE)
 * Better handling of waits from Objectserver (promises)
+* Support for HTTPS
