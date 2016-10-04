@@ -33,11 +33,11 @@ var omnibusConnection = omnibus.createConnection({
 	port		: '8080',
 	user		: 'root',
 	password	: 'password'
-	SSLEnable : true
+	SSLEnable   : true
 });
 ```
 
-SSLEnable : true # Sends request over https
+SSLEnable : true  # Sends request over https <br/>
 SSLEnable : false # Sends request over http (default)
 
 ### SELECT Query
@@ -98,7 +98,7 @@ omnibusConnection.sqlCommand(sql,function(err,rows,numrows,coldesc){
 
 ## Development
 ```
-git clone git@github.com:fredriklandstrom/node-omnibus.git
+git clone https://github.com/FredrikLandstrom/node-omnibus.git
 cd node-omnibus
 npm install
 ```
