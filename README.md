@@ -33,8 +33,13 @@ var omnibusConnection = omnibus.createConnection({
 	port		: '8080',
 	user		: 'root',
 	password	: 'password'
+	SSLEnable : true
 });
 ```
+
+SSLEnable : true # Sends request over https
+SSLEnable : false # Sends request over http (default)
+
 ### SELECT Query
 ```
 // Create a query

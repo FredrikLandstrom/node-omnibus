@@ -7,3 +7,7 @@
 * Multiple bug fixes (see GitHub)
 * Support for more advanced filters
 * Added support for Omnibus SQL Factory
+
+## Version 0.2.0 - October 4, 2016
+* SQL Factory functions update (UPDATE, INSERT, DELETE)
+* Better handling of waits from Objectserver (promises)
