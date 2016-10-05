@@ -12,3 +12,6 @@
 * SQL Factory functions update (UPDATE, INSERT, DELETE)
 * Better handling of waits from Objectserver (promises)
 * Support for HTTPS
+
+## Version 0.2.1 - October 5, 2016
+* Filex HTTPS bug
