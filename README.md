@@ -5,7 +5,7 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
 
 ## Installation
 ```
-npm intall node-omnibus --save
+npm install node-omnibus --save
 ```
 
 ## OMNIbus REST configuration

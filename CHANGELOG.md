@@ -14,4 +14,7 @@
 * Support for HTTPS
 
 ## Version 0.2.1 - October 5, 2016
-* Filex HTTPS bug
+* Fixed HTTPS bug
+
+## Version 0.2.2 - October 12, 2016
+* Typos
