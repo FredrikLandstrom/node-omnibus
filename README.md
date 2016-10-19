@@ -32,13 +32,17 @@ var omnibusConnection = omnibus.createConnection({
 	host		: 'omnibusHostName',
 	port		: '8080',
 	user		: 'root',
-	password	: 'password'
-	SSLEnable   : true
+	password	: 'password',
+	SSLEnable   : true,
+	SSLRejectUnauthorized : false
 });
 ```
 
 SSLEnable : true  # Sends request over https <br/>
 SSLEnable : false # Sends request over http (default)
+
+SSLRejectUnauthorized : false # Does not reject request if certificate is not signed by CA
+SSLRejectUnauthorized : true # Rejects the request if the certificate is invalid
 
 ### SELECT Query
 ```

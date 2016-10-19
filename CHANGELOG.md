@@ -18,3 +18,9 @@
 
 ## Version 0.2.2 - October 12, 2016
 * Typos
+
+## Version 0.2.3 - October 18, 2016
+* Added support for unsigned SSL-certs.
+
+## Version 0.2.4 - October 19, 2016
+* Documentation update
