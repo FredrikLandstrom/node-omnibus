@@ -27,3 +27,6 @@
 
 ## Version 0.2.6 - October 20, 2016
 * fixed true/false defaults on SSLRejectUnauthorized option
+
+## Version 0.2.7 - October 20, 2016
+* Console log remove...
