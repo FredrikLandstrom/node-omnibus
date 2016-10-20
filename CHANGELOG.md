@@ -24,3 +24,6 @@
 
 ## Version 0.2.4 - October 19, 2016
 * Documentation update
+
+## Version 0.2.6 - October 20, 2016
+* fixed true/false defaults on SSLRejectUnauthorized option

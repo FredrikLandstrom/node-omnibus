@@ -1,6 +1,6 @@
 {
   "name": "node-omnibus",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "OMNIbus driver (REST API client) for Node.js",
   "main": "index.js",
   "contributors" : [

@@ -41,7 +41,7 @@ var omnibusConnection = omnibus.createConnection({
 SSLEnable : true  # Sends request over https <br/>
 SSLEnable : false # Sends request over http (default)
 
-SSLRejectUnauthorized : false # Does not reject request if certificate is not signed by CA <br/>
+SSLRejectUnauthorized : false # Does not reject request if certificate is not signed by CA (default)<br/>
 SSLRejectUnauthorized : true  # Rejects the request if the certificate is invalid
 
 ### SELECT Query
