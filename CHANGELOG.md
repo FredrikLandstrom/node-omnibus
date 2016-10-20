@@ -33,3 +33,6 @@
 
 ## Version 0.2.8 - October 20, 2016
 * SSL Reject bug fixed
+
+## Version 0.2.9 - October 20, 2016
+* Fixed WHERE bug
