@@ -30,3 +30,6 @@
 
 ## Version 0.2.7 - October 20, 2016
 * Console log remove...
+
+## Version 0.2.8 - October 20, 2016
+* SSL Reject bug fixed
