@@ -36,3 +36,7 @@
 
 ## Version 0.2.9 - October 20, 2016
 * Fixed WHERE bug
+
+## Version 0.3.0 - November 10, 2016
+* Errorhandling update
+* Promise / Reject update on error
