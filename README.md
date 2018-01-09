@@ -116,7 +116,7 @@ npm test
 
 ### Collaborators
 
-* [fredriklandstrom](https://github.com/fredriklandstrom) - **Fredrik Landström**, Load System
+* [fredriklandstrom](https://github.com/fredriklandstrom) - **Fredrik Landström**, Metricio AB
 * [vukkad-1](https://github.com/vukkad-1) - **Vuk Kadenic**, Compose IT
 
 
