@@ -59,7 +59,7 @@ omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
 })
 ```
 
-### The response object 
+## The response object
 A successful request returns a response object in the format below:
 
 
@@ -119,24 +119,9 @@ omnibusConnection.sqlCommand(sql,function(err,rows,numrows,coldesc){
 });
 ```
 
-## Development
-```
-git clone https://github.com/FredrikLandstrom/node-omnibus.git
-cd node-omnibus
-npm install
-```
+## Contributing
 
-You need a local installation of IBM Tivoli Netcool OMNIbus (IBM commercial license) with the REST interface enabled as described above.
-
-To run the tests:
-```
-npm test
-```
-
-### Collaborators
-
-* [fredriklandstrom](https://github.com/fredriklandstrom) - **Fredrik Landström**, Metricio AB
-* [vukkad-1](https://github.com/vukkad-1) - **Vuk Kadenic**, Compose IT
+See the [Contributors Guide](/CONTRIBUTING.md)
 
 
 ## Changelog
@@ -151,7 +136,6 @@ If you encounter any bugs or other issues, please file them in the
 
 ## Trademark information
 IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Corporation, registered in many jurisdictions worldwide.
-
 
 [license]: LICENSE
 [issue-tracker]: https://github.com/fredriklandstrom/node-omnibus/issues
