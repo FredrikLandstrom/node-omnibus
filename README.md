@@ -49,7 +49,7 @@ const omnibusConnection = omnibus.createConnection(connectionParameters)
 <br>
 
 |Parameter | Content   |Description|
-|----------|------------|-----------|
+|:----------|:------------|:-----------|
 | host | String | hostname or IP-address of the Objectserver (required) |
 | port | String | listening NHttpd-port of the Objectserver (required) |
 | user | String | username to connect as |
