@@ -40,7 +40,7 @@ const connectionParameters = {
 	port		: '8080',	// Required - NHttpd.ListeningPort
 	user		: 'root',	// Required - Objectserver username
 	password	: 'password',	// Required - Objevtserver password
-	SSLEnable   : true,		// Requests over https (default: false)
+	SSLEnable	: true,		// Requests over https (default: false)
 	SSLRejectUnauthorized : false	// Reject request if certificate is invalid (default: true)
 }
 
