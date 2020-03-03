@@ -46,16 +46,6 @@ const connectionParameters = {
 
 const omnibusConnection = omnibus.createConnection(connectionParameters)
 ```
-<br>
-
-|Parameter | Content   |Description|
-|:----------|:------------|:-----------|
-| host | String | hostname or IP-address of the Objectserver (required) |
-| port | String | listening NHttpd-port of the Objectserver (required) |
-| user | String | username to connect as |
-| password | String | password for the user |
-| SSLEnable | true / __false__ | __true__: &nbsp;requests over https <br> __false__: requests over http (default) |
-| SSLRejectUnauthorized | __true__ / false | __true__: &nbsp;do not reject request if certificate is not signed by CA (default)<br>__false__: reject the request if the certificate is invalid |
 
 ### Quick start
 #### Simple SQL request to the objectserver
