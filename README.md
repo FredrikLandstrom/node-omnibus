@@ -84,6 +84,20 @@ A successful request returns a response object in the following JSON structure:
 	}
 }
 ```
+#### Example loop on the response object
+```javascript
+omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
+	// loop and console log Node and Summary
+	res.rowset.rows.forEach(event,index){
+		const {node,summary} = event
+		console.log("Node: "+node+", Summary: "+summary)
+	}
+});
+
+// Result:
+// Node: Switch01, Summary: Port 01 Down
+// ...
+```
 
 ### SELECT Query
 ```
