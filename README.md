@@ -58,8 +58,32 @@ omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
 ```
 
 ## The response object
-A successful request returns a response object in the format below:
-
+A successful request returns a response object in the following JSON structure:
+```javascript
+{
+	"rowset": {
+		"osname": "NCOMS",
+		"affectedrows": 10,
+		"coldesc": [
+			{
+			"name": "Identifier",
+			"type": "string",
+			"size": 255
+			},
+			{...next column...}
+		],
+		"rows": [
+			{
+				"Identifier": "Switch01LinkDownPort1",
+				"Serial": 12345,
+				"Node": "Switch01",
+				...next field
+			},
+			{...next event...}
+		]
+	}
+}
+```
 
 ### SELECT Query
 ```
