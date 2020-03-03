@@ -58,6 +58,15 @@ Temporary Items
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
-node_modules/
-npm-debug.log
-dev
+# dependencies
+/node_modules
+/lib
+
+# misc
+.DS_Store
+.env*
+.testserver
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
