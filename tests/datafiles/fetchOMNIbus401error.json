@@ -1,0 +1,5 @@
+{
+  "url": "http://omnihost:8080/objectserver/restapi/alerts/status",
+  "status": 401,
+  "statusText": "Authorization Required"
+}

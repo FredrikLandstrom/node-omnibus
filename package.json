@@ -1,24 +1,29 @@
 {
   "name": "node-omnibus",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "description": "OMNIbus driver (REST API client) for Node.js",
-  "main": "index.js",
-  "contributors" : [
-  {
-     "name": "Fredrik Landstrom",
-     "email": "fredrik.landstrom@load.se"
-  },
-  {
-     "name": "Vuk Kadenic",
-     "email": "vuk.kadenic@compose.se"
-  }
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "contributors": [
+    {
+      "name": "Fredrik Landstrom",
+      "email": "fredrik.landstrom@load.se"
+    },
+    {
+      "name": "Vuk Kadenic",
+      "email": "vuk.kadenic@cygate.se"
+    }
   ],
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "mocha"
+    "build": "tsc",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch",
+    "test:clearCache": "jest --clearCache",
+    "lint": "eslint --ignore-path .gitignore --ext .ts src/"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/FredrikLandstrom/node-omnibus.git"
@@ -37,14 +42,20 @@
   },
   "homepage": "https://github.com/FredrikLandstrom/node-omnibus",
   "dependencies": {
-    "bluebird": "^2.10.2",
-    "http-status": "^0.2.0",
-    "request": "^2.64.0"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "chai": "^3.3.0",
-    "mocha": "^2.3.3",
-    "sinon": "^1.17.1",
-    "sinon-chai": "^2.8.0"
+    "@types/jest": "^25.1.2",
+    "@types/node-fetch": "^2.5.4",
+    "@typescript-eslint/eslint-plugin": "^2.19.2",
+    "@typescript-eslint/parser": "^2.19.2",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "fetch-mock": "^9.0.0-beta.2",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "ts-jest": "^25.2.0",
+    "typescript": "^3.7.5"
   }
 }
