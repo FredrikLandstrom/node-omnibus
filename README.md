@@ -36,7 +36,7 @@ NHttpd.ListeningPort: 8080
 const omnibus = require('node-omnibus');
 
 const connectionParameters = {
-	host		: 'omnibusHostName',
+	host		: 'omnihost',
 	port		: '8080',
 	user		: 'root',
 	password	: 'password',
@@ -58,7 +58,7 @@ const omnibusConnection = omnibus.createConnection(connectionParameters)
 | SSLRejectUnauthorized | __true__ / false | __true__: &nbsp;do not reject request if certificate is not signed by CA (default)<br>__false__: reject the request if the certificate is invalid |
 
 ### Quick start
-#### Simpl SQL request to the objectserver
+#### Simple SQL request to the objectserver
 ```javascript
 omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
 	// print the result from the query
@@ -68,6 +68,10 @@ omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
 	console.log(err);
 })
 ```
+
+### The response object 
+A successful request returns a response object in the format below:
+
 
 ### SELECT Query
 ```
