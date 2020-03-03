@@ -1,4 +1,11 @@
-# node-omnibus future
+# node-omnibus
+
+---
+
+__IMPORTANT (2020-03-03)__: This is the "future" branch of node-omnibus written in typescript. Currently under development and should __not in any way__ be used in production environment.
+
+---
+
 node-omnibus is a client library for accessing the OMNIbus Objectserver database, from [Node.js](https://nodejs.org). It uses the Objectser er [REST API](http://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/omnibus/wip/api/reference/omn_api_http_httpinterface.html?lang=en) and supports IBM Tivoli Netcool OMNIbus version 7.4 and above.
 
 > '[IBM Tivoli Netcool OMNIbus](http://www.ibm.com/software/products/ibmtivolinetcoolomnibus) provides near real-time service assurance for business infrastructure, applications, servers, network devices and protocols, internet protocols, storage and security devices' (from ibm.com)
@@ -25,24 +32,41 @@ NHttpd.ListeningPort: 8080
 ## Usage
 
 ### Creating the connection
-```
-var omnibus = require('node-omnibus');
+```javascript
+const omnibus = require('node-omnibus');
 
-var omnibusConnection = omnibus.createConnection({
+const connectionParameters = {
 	host		: 'omnibusHostName',
 	port		: '8080',
 	user		: 'root',
 	password	: 'password',
 	SSLEnable   : true,
 	SSLRejectUnauthorized : false
-});
+}
+
+const omnibusConnection = omnibus.createConnection(connectionParameters)
 ```
 
+|Parameter | Content   |Description|
+|----------|------------|-----------|
+| SSLEnale | __true__ / false | true: requests over https <br> false: requests over http (default)
 SSLEnable : true  # Sends request over https <br/>
 SSLEnable : false # Sends request over http (default)
 
 SSLRejectUnauthorized : false # Does not reject request if certificate is not signed by CA (default)<br/>
 SSLRejectUnauthorized : true  # Rejects the request if the certificate is invalid
+
+### Quick start
+#### Simpl SQL request to the objectserver
+```javascript
+omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
+	// print the result from the query
+	console.log(res);
+}).catch(err => {
+	// console log any errors
+	console.log(err);
+})
+```
 
 ### SELECT Query
 ```
