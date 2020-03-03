@@ -1,5 +1,4 @@
 # node-omnibus
----
 [![npm version][npm-image]][npm-url]
 [![install size][install-size-image]][install-size-url]
 
@@ -32,6 +31,7 @@ NHttpd.ListeningPort: 8080
 ```javascript
 const omnibus = require('node-omnibus');
 
+// set connection parameters
 const connectionParameters = {
 	host		: 'omnihost',	// Required - Objectserver to connect to
 	port		: '8080',	// Required - NHttpd.ListeningPort
@@ -41,6 +41,7 @@ const connectionParameters = {
 	SSLRejectUnauthorized : false	// Reject request if certificate is invalid (default: true)
 }
 
+// create the connection
 const omnibusConnection = omnibus.createConnection(connectionParameters)
 ```
 
