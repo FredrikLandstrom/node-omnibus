@@ -7,10 +7,31 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
 
 > '[IBM Tivoli Netcool OMNIbus](http://www.ibm.com/software/products/ibmtivolinetcoolomnibus) provides near real-time service assurance for business infrastructure, applications, servers, network devices and protocols, internet protocols, storage and security devices' (from ibm.com)
 
-## Installationu
+## Installation
 
 ```
 npm install node-omnibus --save
+```
+
+##Arrow functions
+This manual uses the new ES6 Arrow functions but if you prefere to use the old style, use the example below
+
+**ES6 Arrow Function Example**
+
+```javascript
+omnibusConnection.find(res => console.log(res)).catch(err => console.log(err));
+```
+
+**Normal Function Example**
+
+```javascript
+omnibusConnection
+  .find(function(res) {
+    console.log(res);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 ```
 
 ## OMNIbus REST configuration
@@ -143,28 +164,108 @@ omnibusConnection
     // Catch promise error (reject)
     console.log(err);
   });
-
-// Result:
-//{
-//	url: 'http://omnihost:8080/objectserver/restapi/sql/factory",
-//	status: 401
-//	statusText: 'Authorization Required'
-//}
 ```
 
-### SELECT Query
+## Query Path
 
+The default query path (database/table) is set to alerts.status but can easily be changed by the setQueryPath method on the connection object.
+
+```javascript
+// change querypath to alerts.details
+omnibusConnection.setQueryPath('alerts.details');
 ```
-// Create a query
-var query = 'SELECT Node,Serial from alerts.status order by Serial DESC';
 
-// Run Query
-omnibusConnection.query(query,function(err,rows,numrows,coldesc){
-	console.log(rows); // Returns JSON
+You can also prepare many different connections with different query path when you create the connection.
+
+```javascript
+const statusDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.status');
+const detailsDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.details');
+const journalDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.journal');
+
+// print all events
+statusDb.find().then(res => console.log(res));
+// print all details
+detailsDb.find().then(res => console.log(res));
+// print all journals
+journalDb.find().then(res => console.log(res));
+```
+
+## Querying the ObjectServer (SELECT)
+
+### .find(OmnibusQueryParams)
+
+Performs a GET requst to the objectserver with optional query parameters.
+
+```javascript
+omnibusConnection
+  .find({
+    filter: { Node: 'switch01' },
+    collist: ['Node', 'Severity', 'Summary'],
+    orderby: { Node: 'ASC' },
+  })
+  .then(res => console.log(res));
+
+// Equals: select Node, Severity, Summary from alerts.status where Node='switch01' ORDER BY Node ASC
+```
+
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see .sqlFactory
+
+### .sqlFactory(sqlQuery)
+
+Performs a get request to the objectserver with an arbitrary SQL command.
+
+```javascript
+// create the query
+const myQuery = 'select Node,Severity,Summary from alerts.status where Node='switch01' ORDER BY Node ASC'
+
+// send to objectserver and print result
+omnibusConnection.sqlQuery(myQuery).then(res=>{
+	console.log(res);
 });
 ```
 
-### DELETE Query
+_Note: You do not need to set a query path for .sqlFactory method._
+
+## Deleting records (DELETE)
+
+### .destroy(OmnibusQueryParams)
+
+Performs a DELETE request to the objectserver with **required** filter query params. The filter parameter is required to prevent accidental deletion of the entire table.
+
+```javascript
+omnibusConnection
+  .destroy({
+    filter: { Node: 'switch01' },
+  })
+  .then(res => console.log(res));
+
+// Equals: delete from alerts.status where Node='switch01'
+```
+
+To delete everything, just provide an empty filter.
+
+```javascript
+// WARNING: THIS WILL DELETE EVERYTHING FROM THE TABLE
+omnibusConnection
+  .destroy({
+    filter: {},
+  })
+  .then(res => console.log(res));
+
+// Equals: delete from alerts.status
+```
+
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see .sqlFactory
+
+## Updating records (UPDATE)
+
+### .update(Record)
+
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](<#markdown-header-.sqlFactory(sqlQuery)>)
+
+## Adding records (INSERT)
+
+### .insert(Record)
 
 ```
 // Create a query
