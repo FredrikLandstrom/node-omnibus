@@ -66,7 +66,6 @@ export class OmnibusQueryGenerator {
   setAttributes(parameters: OmnibusConnectionParameters): OmnibusQueryGenerator {
     parameters = parameters || {};
     Object.assign(this._parameters, parameters);
-
     // Custom Error object
     let throwError = (message: string): Error => {
       throw new OmnibusError(message);
@@ -86,7 +85,7 @@ export class OmnibusQueryGenerator {
     this._parameters.host ? (this._url.hostname = this._parameters.host) : throwError('Parameter host is required');
 
     // Create the HTTP Authentication headers
-    if (!parameters.user) {
+    if (!this._parameters.user) {
       throwError('Parameter user is required');
     } else {
       this._httpAuth =
