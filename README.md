@@ -263,7 +263,7 @@ You can only use one filter expression. AND or OR is not supported. To use more 
 
 ### .update(Record)
 
-You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](<#user-content-.sqlFactory(sqlQuery)>)
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](<###.sqlFactory(sqlQuery)>)
 
 ## Adding records (INSERT)
 
