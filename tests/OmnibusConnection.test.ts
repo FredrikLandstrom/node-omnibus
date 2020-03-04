@@ -22,7 +22,6 @@ const params = {
   password: '',
   SSLEnable: false,
   SSLRejectUnauthorized: false,
-  endpoint: 'alerts.status',
 };
 
 let testParams: OmnibusConnectionParameters = {
