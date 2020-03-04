@@ -208,9 +208,10 @@ omnibusConnection
 // Equals: select Node, Severity, Summary from alerts.status where Node='switch01' ORDER BY Node ASC
 ```
 
-You can only use one filter expression. AND or OR is not supported. To use more complex queries, see .sqlFactory
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
 #markdown-header-test
+<a id="sqlFactory"></a>
 
 ### .sqlFactory(sqlQuery)
 
@@ -257,13 +258,13 @@ omnibusConnection
 // Equals: delete from alerts.status
 ```
 
-You can only use one filter expression. AND or OR is not supported. To use more complex queries, see .sqlFactory
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
 ## Updating records (UPDATE)
 
 ### .update(Record)
 
-You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](<###.sqlFactory(sqlQuery)>)
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
 ## Adding records (INSERT)
 
