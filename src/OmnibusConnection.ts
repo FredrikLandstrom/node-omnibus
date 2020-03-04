@@ -19,7 +19,7 @@ export default class OmnibusConnection {
   }
 
   get getAttributes(): OmnibusConnectionParameters {
-    return this.parameters;
+    return this.queryGenerator.getAttributes;
     // Returns all the connection parameters from the queryGenerator object
   }
 

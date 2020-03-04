@@ -107,6 +107,11 @@ export class OmnibusQueryGenerator {
     return this;
   }
 
+  get getAttributes(): Object {
+    // Returns the parameters for the connection
+    return this._parameters;
+  }
+
   find(findstring: string): OmnibusQueryGenerator {
     // Performs the a query of method GET
     return this;
