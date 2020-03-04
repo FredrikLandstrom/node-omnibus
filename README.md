@@ -210,6 +210,8 @@ omnibusConnection
 
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see .sqlFactory
 
+#markdown-header-test
+
 ### .sqlFactory(sqlQuery)
 
 Performs a get request to the objectserver with an arbitrary SQL command.
@@ -261,7 +263,7 @@ You can only use one filter expression. AND or OR is not supported. To use more 
 
 ### .update(Record)
 
-You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](<#markdown-header-.sqlFactory(sqlQuery)>)
+You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](<#user-content-.sqlFactory(sqlQuery)>)
 
 ## Adding records (INSERT)
 
