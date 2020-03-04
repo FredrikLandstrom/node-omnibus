@@ -2,6 +2,7 @@ export class OmnibusQueryInterface {
   constructor(public fetch: Function) {}
 
   async send(url: RequestInfo, init?: RequestInit): Promise<{}> {
+    console.log(url);
     return await this.fetch(url, init)
       .then((res: Response) => {
         // Check statuscode
