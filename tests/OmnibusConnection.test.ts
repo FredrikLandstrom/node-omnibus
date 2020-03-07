@@ -3,16 +3,7 @@ import { OmnibusQueryParameters, OmnibusConnectionParameters } from '../src/Omni
 
 const parameters = {};
 
-const fakeFetch = jest.fn().mockReturnValue(
-  Promise.resolve({
-    json: () =>
-      Promise.resolve({
-        data: {
-          mydata: 20,
-        },
-      }),
-  }),
-);
+const fetchMock = require('fetch-mock').sandbox();
 
 //const omnibusConnection = new OmnibusConnection(fakeFetch, parameters);
 const params = {
@@ -34,33 +25,37 @@ let testParams: OmnibusConnectionParameters = {
 };
 
 describe('OmnibusConnection Class #1- Constructor', () => {
-  test('should throw PARAMETER_ERROR if host is missing', () => {
+  test('should throw PARAMETERMISSING if host is missing', () => {
     Object.assign(testParams, params);
     delete testParams.host;
     expect(() => {
-      new OmnibusConnection(fakeFetch, testParams);
-    }).toThrow('Parameter host is required');
+      new OmnibusConnection(fetchMock, testParams);
+    }).toThrow('Parameter missing : Parameter host is missing');
   });
-  test('should throw PARAMETER_ERROR if port is missing', () => {
+  test('should throw PARAMETERMISSING if port is missing', () => {
     Object.assign(testParams, params);
     delete testParams.port;
     expect(() => {
-      new OmnibusConnection(fakeFetch, testParams);
-    }).toThrow('Parameter port is required');
+      new OmnibusConnection(fetchMock, testParams);
+    }).toThrow('Parameter missing : Parameter port is missing');
   });
-  test('should throw PARAMETER_ERROR if user is missing', () => {
+  test('should throw PARAMETERMISSING if user is missing', () => {
     Object.assign(testParams, params);
     delete testParams.user;
     expect(() => {
-      new OmnibusConnection(fakeFetch, testParams);
-    }).toThrow('Parameter user is required');
+      new OmnibusConnection(fetchMock, testParams);
+    }).toThrow('Parameter missing : Parameter user is missing');
   });
 });
 
 describe('OmnibusConnection Class #2 - Connection Parameters', () => {
   let connection: OmnibusConnection;
 
-  const omnibusQueryParameters: OmnibusQueryParameters = { filter: 'test', collist: 'test', orderby: 'test' };
+  const omnibusQueryParameters: OmnibusQueryParameters = {
+    filter: 'test',
+    collist: ['Node', 'Summary'],
+    orderby: 'test',
+  };
 
   beforeEach(() => {
     Object.assign(testParams, params);
@@ -68,13 +63,13 @@ describe('OmnibusConnection Class #2 - Connection Parameters', () => {
 
   test('URL when not using SSL should contain http://', () => {
     testParams.SSLEnable = false;
-    connection = new OmnibusConnection(fakeFetch, testParams);
+    connection = new OmnibusConnection(fetchMock, testParams);
     expect(connection.getUrl).toMatch('http://omnihost:8080/objectserver/restapi');
   });
 
   test('URL when using SSL should contain https://', () => {
     testParams.SSLEnable = true;
-    connection = new OmnibusConnection(fakeFetch, testParams);
+    connection = new OmnibusConnection(fetchMock, testParams);
     expect(connection.getUrl).toMatch('https://omnihost:8080/objectserver/restapi');
   });
 

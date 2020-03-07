@@ -327,6 +327,11 @@
         "name": "TTStatus",
         "type": "integer",
         "size": 4
+      },
+      {
+        "name": "RowSerial",
+        "type": "integer",
+        "size": 4
       }
     ],
     "rows": [
@@ -395,7 +400,8 @@
         "SLA": "",
         "AffectedUsers": 0,
         "TTId": "",
-        "TTStatus": 0
+        "TTStatus": 0,
+        "RowSerial": 0
       },
       {
         "Identifier": "syslog@hostname.domain.com: No syslog messages received for 60 seconds",
@@ -462,7 +468,8 @@
         "SLA": "",
         "AffectedUsers": 0,
         "TTId": "",
-        "TTStatus": 0
+        "TTStatus": 0,
+        "RowSerial": 0
       }
     ]
   }
