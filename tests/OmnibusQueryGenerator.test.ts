@@ -46,27 +46,43 @@ describe('Omnibus Query Class - SyncModel tests', () => {
   });
 });
 
-describe('Omnibus Query Class - Enpoint tests', () => {
-  const testQuery = new OmnibusQueryGenerator(fetchMock);
+describe('OmnibusQueryGenerator - syncModel()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - setQueryPath()', () => {
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
   test('should throw if format is not.db.table or db/table', () => {
     expect(() => {
-      testQuery.setQueryPath('/alerts/status/thisiswrowng');
+      queryGenerator.setQueryPath('/alerts/status/thisiswrowng');
     }).toThrow('Incorrect Endpoint format : supplied path [/alerts/status/thisiswrowng] is incorrect');
     expect(() => {
-      testQuery.setQueryPath('alerts.status.thisiswrowng');
+      queryGenerator.setQueryPath('alerts.status.thisiswrowng');
     }).toThrow('Incorrect Endpoint format : supplied path [alerts.status.thisiswrowng] is incorrect');
     expect(() => {
-      testQuery.setQueryPath('alerts');
+      queryGenerator.setQueryPath('alerts');
     }).toThrow('Incorrect Endpoint format : supplied path [alerts] is incorrect');
     expect(() => {
-      testQuery.setQueryPath('alerts_status');
+      queryGenerator.setQueryPath('alerts_status');
     }).toThrow('Incorrect Endpoint format : supplied path [alerts_status] is incorrect');
   });
   test('should convert endpoint to correct format', () => {
-    expect(testQuery.setQueryPath('alerts.status').getUrl).toMatch('alerts/status');
-    expect(testQuery.setQueryPath('alerts/status').getUrl).toMatch('alerts/status');
-    expect(testQuery.setQueryPath('').getUrl).toMatch('alerts/status');
+    expect(queryGenerator.setQueryPath('alerts.status').getUrl).toMatch('alerts/status');
+    expect(queryGenerator.setQueryPath('alerts/status').getUrl).toMatch('alerts/status');
+    expect(queryGenerator.setQueryPath('').getUrl).toMatch('alerts/status');
   });
+});
+
+describe('OmnibusQueryGenerator - getModel()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - setRequestInit()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - setAttributes()', () => {
+  const queryGeneratory = new OmnibusQueryGenerator(fetchMock);
   test('setAttributes should set attributes correctly', () => {
     // Set default attributes
     const expectedParams = {
@@ -77,24 +93,62 @@ describe('Omnibus Query Class - Enpoint tests', () => {
       SSLEnable: false,
       SSLRejectUnauthorized: false,
     };
-    testQuery.setAttributes(expectedParams);
+    queryGeneratory.setAttributes(expectedParams);
     // test default paramtetrs
-    expect(testQuery.getAttributes).toMatchObject(expectedParams);
+    expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
     // Change some parameters
     let newParameters: OmnibusConnectionParameters = { host: 'newhost', password: 'newpassword', port: 'newPort' };
     // Update the parameters to test with
     Object.assign(expectedParams, newParameters);
     // set the parameters on the testQuery
-    testQuery.setAttributes(newParameters);
+    queryGeneratory.setAttributes(newParameters);
     // get them and validate
-    expect(testQuery.getAttributes).toMatchObject(expectedParams);
+    expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
     // Change other parameters
     newParameters = { SSLEnable: true, SSLRejectUnauthorized: true, port: 'newPort' };
     // Update the parameters to test with
     Object.assign(expectedParams, newParameters);
     // set the parameters on the testQuery
-    testQuery.setAttributes(newParameters);
+    queryGeneratory.setAttributes(newParameters);
     // get them and validate
-    expect(testQuery.getAttributes).toMatchObject(expectedParams);
+    expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
   });
+});
+
+describe('OmnibusQueryGenerator - getAttributes()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - find()', () => {
+  const queryGeneratory = new OmnibusQueryGenerator(fetchMock);
+  queryGeneratory.setAttributes(params);
+  test('it should return a response', async () => {
+    await expect(queryGeneratory.find({ filter: { Node: 'hostname.domain.com' } })).resolves.toMatchObject(
+      omnibusSuccessGetJSON,
+    );
+  });
+});
+
+describe('OmnibusQueryGenerator - destroy()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - update()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - insert()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - sqlFactory()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - constructPayload()', () => {
+  test('Test1', async () => {});
+});
+
+describe('OmnibusQueryGenerator - constructSearchParams()', () => {
+  test('Test1', async () => {});
 });
