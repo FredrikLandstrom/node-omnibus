@@ -3,8 +3,6 @@ import {
   OmnibusQueryParameters,
   OmnibusConnectionParameters,
   OmnibusModel,
-  OmnibusField,
-  OmnibusFilter,
   OmnibusResponse,
 } from './OmnibusQueryGenerator';
 
