@@ -33,8 +33,8 @@ export class OmnibusQueryInterface {
           // Error type not known.
           return this.formatResponse(null, {
             url: url.toString(),
-            status: 'ERROR UKNOWN',
-            statusText: JSON.stringify(error, null, 2),
+            status: 'ERROR UNKNOWN',
+            statusText: error,
           });
         }
       });
