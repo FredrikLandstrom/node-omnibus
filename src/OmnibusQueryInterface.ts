@@ -1,8 +1,9 @@
+import { OmnibusResponse } from './OmnibusQueryGenerator';
+
 export class OmnibusQueryInterface {
   constructor(public fetch: Function) {}
 
-  async send(url: RequestInfo, init?: RequestInit): Promise<{}> {
-    console.log(url);
+  async send(url: RequestInfo, init?: RequestInit): Promise<OmnibusResponse> {
     return await this.fetch(url, init)
       .then((res: Response) => {
         // Check statuscode

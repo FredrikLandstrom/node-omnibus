@@ -1,4 +1,12 @@
-import { OmnibusQueryGenerator, OmnibusQueryParams, OmnibusConnectionParameters } from './OmnibusQueryGenerator';
+import {
+  OmnibusQueryGenerator,
+  OmnibusQueryParameters,
+  OmnibusConnectionParameters,
+  OmnibusModel,
+  OmnibusField,
+  OmnibusFilter,
+  OmnibusResponse,
+} from './OmnibusQueryGenerator';
 
 export default class OmnibusConnection {
   queryGenerator: OmnibusQueryGenerator;
@@ -6,6 +14,10 @@ export default class OmnibusConnection {
   constructor(public fetch: Function, public parameters: OmnibusConnectionParameters) {
     this.queryGenerator = new OmnibusQueryGenerator(fetch);
     this.queryGenerator.setAttributes(parameters);
+  }
+
+  async syncModel(): Promise<OmnibusModel> {
+    return this.queryGenerator.syncModel();
   }
 
   setQueryPath(queryPath: string): OmnibusQueryGenerator {
@@ -27,25 +39,31 @@ export default class OmnibusConnection {
     return this.queryGenerator.getUrl;
   }
 
-  find(queryparams: OmnibusQueryParams): Promise<{}> {
+  async getModel(): Promise<OmnibusModel> {
+    return this.queryGenerator.getModel();
+  }
+
+  find(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
     // This will return the actual find
     return this.queryGenerator.find(queryparams);
   }
 
-  destroy(findstring: string): OmnibusQueryGenerator {
-    // Performs the query of method DELETE
-    return this.queryGenerator.destroy(findstring);
-  }
-  update(findstring: string): OmnibusQueryGenerator {
-    // Performs the query of method UPDATE
-    return this.queryGenerator.update(findstring);
-  }
-  insert(findstring: string): OmnibusQueryGenerator {
-    // Performs the query of method PUT
-    return this.queryGenerator.insert(findstring);
+  destroy(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+    return this.queryGenerator.destroy(queryparams);
   }
 
-  sqlFactory(sqlQuery: string): Promise<{}> {
+  async update(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+    // Performs the query of method UPDATE
+    return this.queryGenerator.update(queryparams);
+  }
+
+  // Fix TYPE to OmnibusResponseObject
+  async insert(insertFields: { [index: string]: any }): Promise<{}> {
+    // Performs the query of method PUT
+    return this.queryGenerator.insert(insertFields);
+  }
+
+  sqlFactory(sqlQuery: string): Promise<OmnibusResponse> {
     // Send SQL query direct to the connection
     return this.queryGenerator.sqlFactory(sqlQuery);
   }
