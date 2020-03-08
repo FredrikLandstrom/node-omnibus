@@ -17,12 +17,36 @@ const omnibus401Error = JSON.parse(fs.readFileSync('./tests/datafiles/fetchOMNIb
 
 const fetchMock = require('fetch-mock').sandbox();
 
+// Fetch to run with the right password (see headers)
 fetchMock.get({
   url: 'begin:http://omnihost',
   headers: { Authorization: 'Basic cm9vdDo=' },
   response: omnibusSuccessGetJSON,
   overwriteRoutes: false,
 });
+
+fetchMock.delete({
+  url: 'begin:http://omnihost',
+  headers: { Authorization: 'Basic cm9vdDo=' },
+  response: omnibusSuccessGetJSON,
+  overwriteRoutes: false,
+});
+
+fetchMock.patch({
+  url: 'begin:http://omnihost',
+  headers: { Authorization: 'Basic cm9vdDo=' },
+  response: omnibusSuccessGetJSON,
+  overwriteRoutes: false,
+});
+
+fetchMock.post({
+  url: 'begin:http://omnihost',
+  headers: { Authorization: 'Basic cm9vdDo=' },
+  response: omnibusSuccessGetJSON,
+  overwriteRoutes: false,
+});
+
+// Fetch to run with the wrong password (see headers)
 fetchMock.get({
   url: 'begin:http://omnihost',
   headers: { Authorization: 'Basic cm9vdDp3cm9uZ3Bhc3N3b3Jk' },
@@ -30,24 +54,22 @@ fetchMock.get({
   overwriteRoutes: false,
 });
 
-describe('Omnibus Query Class - SyncModel tests', () => {
-  const testQuery = new OmnibusQueryGenerator(fetchMock);
-  testQuery.setAttributes(params);
+describe('OmnibusQueryGenerator - syncModel()', () => {
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
 
   test('should return a model', async () => {
-    await expect(testQuery.syncModel()).resolves.toMatchObject(omnibusModel);
+    await expect(queryGenerator.syncModel()).resolves.toMatchObject(omnibusModel);
   });
-  test('should return an error', async () => {
-    testQuery.setAttributes({ password: 'wrongpassword' });
-    await expect(testQuery.syncModel()).rejects.toMatchObject({
-      status: 'ERRORINSYNC',
-      statusText: 'Error in sync with the objectserver',
-    });
+  test('should return an error when connection to OS lost', async () => {
+    queryGenerator.setAttributes({ password: 'wrongpassword' });
+    try {
+      // This should fail with an error
+      await queryGenerator.syncModel();
+    } catch (e) {
+      expect(e).toMatchObject({ name: 'ERRORINSYNC' });
+    }
   });
-});
-
-describe('OmnibusQueryGenerator - syncModel()', () => {
-  test('Test1', async () => {});
 });
 
 describe('OmnibusQueryGenerator - setQueryPath()', () => {
@@ -74,11 +96,15 @@ describe('OmnibusQueryGenerator - setQueryPath()', () => {
 });
 
 describe('OmnibusQueryGenerator - getModel()', () => {
-  test('Test1', async () => {});
-});
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
+  test('should get model when it doesent exist', async () => {
+    await expect(queryGenerator.getModel()).resolves.toMatchObject(omnibusModel);
+  });
 
-describe('OmnibusQueryGenerator - setRequestInit()', () => {
-  test('Test1', async () => {});
+  test('should get stored model when exist', async () => {
+    await expect(queryGenerator.getModel()).resolves.toMatchObject(omnibusModel);
+  });
 });
 
 describe('OmnibusQueryGenerator - setAttributes()', () => {
@@ -93,6 +119,12 @@ describe('OmnibusQueryGenerator - setAttributes()', () => {
       SSLEnable: false,
       SSLRejectUnauthorized: false,
     };
+    // Empty parameters
+
+    expect(() => {
+      queryGeneratory.setAttributes();
+    }).toThrow('Parameter missing : Parameter port is missing');
+
     queryGeneratory.setAttributes(expectedParams);
     // test default paramtetrs
     expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
@@ -115,40 +147,160 @@ describe('OmnibusQueryGenerator - setAttributes()', () => {
   });
 });
 
-describe('OmnibusQueryGenerator - getAttributes()', () => {
-  test('Test1', async () => {});
+describe('OmnibusQueryGenerator - find()', () => {
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
+  test('it should return a response', async () => {
+    await expect(queryGenerator.find({ filter: { Node: 'hostname.domain.com' } })).resolves.toMatchObject(
+      omnibusSuccessGetJSON,
+    );
+  });
+  test('url should update with filter,collist and orderby when used', async () => {
+    // Test filter
+    await queryGenerator.find({ filter: { Node: 'hostname.domain.com' } }).then(res => {
+      expect(queryGenerator.getUrl).toEqual(
+        'http://omnihost:8080/objectserver/restapi/alerts/status?filter=Node%3D%27hostname.domain.com%27&collist=&orderby=',
+      );
+    });
+    // Test collist
+    await queryGenerator.find({ filter: { Node: 'hostname.domain.com' }, collist: ['Node', 'Summary'] }).then(res => {
+      expect(queryGenerator.getUrl).toEqual(
+        'http://omnihost:8080/objectserver/restapi/alerts/status?filter=Node%3D%27hostname.domain.com%27&collist=Node%2CSummary&orderby=',
+      );
+    });
+    // Test orderby
+    await queryGenerator
+      .find({ filter: { Node: 'hostname.domain.com' }, collist: ['Node', 'Summary'], orderby: { Node: 'ASC' } })
+      .then(res => {
+        expect(queryGenerator.getUrl).toEqual(
+          'http://omnihost:8080/objectserver/restapi/alerts/status?filter=Node%3D%27hostname.domain.com%27&collist=Node%2CSummary&orderby=Node+ASC',
+        );
+      });
+  });
 });
 
-describe('OmnibusQueryGenerator - find()', () => {
-  const queryGeneratory = new OmnibusQueryGenerator(fetchMock);
-  queryGeneratory.setAttributes(params);
-  test('it should return a response', async () => {
-    await expect(queryGeneratory.find({ filter: { Node: 'hostname.domain.com' } })).resolves.toMatchObject(
+describe('OmnibusQueryGenerator - destroy()', () => {
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
+  test('should throw error if query parameters are missing', async () => {
+    try {
+      await queryGenerator.destroy();
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'DESTROYFILTERMISSING' });
+    }
+  });
+  test('should throw error if query parameter filter is missing', async () => {
+    try {
+      await queryGenerator.destroy({ orderby: 'this could delete the whole table if used' });
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'DESTROYFILTERMISSING' });
+    }
+  });
+  test('should return promise if filter is supplied', async () => {
+    await expect(queryGenerator.destroy({ filter: { Node: 'omnihost' } })).resolves.toMatchObject(
       omnibusSuccessGetJSON,
     );
   });
 });
 
-describe('OmnibusQueryGenerator - destroy()', () => {
-  test('Test1', async () => {});
-});
-
 describe('OmnibusQueryGenerator - update()', () => {
-  test('Test1', async () => {});
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
+  test('should throw error if query parameters are missing', async () => {
+    try {
+      await queryGenerator.update();
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'UPDATEPARAMETERMISSING' });
+    }
+  });
+  test('should throw error if query parameter update is missing', async () => {
+    try {
+      await queryGenerator.update({ orderby: 'this is not a parameter for update' });
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'UPDATEPARAMETERMISSING' });
+    }
+  });
+  test('should throw error if query parameter filter is missing', async () => {
+    try {
+      await queryGenerator.update({ update: { Node: 'omnihost_new' } });
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'UPDATEFILTERMISSING' });
+    }
+  });
+  test('should return promise if update and filter is supplied', async () => {
+    await expect(
+      queryGenerator.update({ filter: { Node: 'omnihost' }, update: { Node: 'omnihost_new' } }),
+    ).resolves.toMatchObject(omnibusSuccessGetJSON);
+  });
 });
 
 describe('OmnibusQueryGenerator - insert()', () => {
-  test('Test1', async () => {});
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
+  test('should throw error if query parameters are missing', async () => {
+    try {
+      await queryGenerator.insert();
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'INSERTPARAMETERMISSING' });
+    }
+  });
+  test('should throw error if query parameter fields is missing', async () => {
+    try {
+      await queryGenerator.insert({ orderby: 'this is not a parameter for insert' });
+    } catch (e) {
+      expect(e).toMatchObject({ errorType: 'INSERTPARAMETERMISSING' });
+    }
+  });
+  test('should return promise if fields is supplied', async () => {
+    await expect(queryGenerator.insert({ fields: { Node: 'omnihost' } })).resolves.toMatchObject(omnibusSuccessGetJSON);
+  });
 });
 
 describe('OmnibusQueryGenerator - sqlFactory()', () => {
-  test('Test1', async () => {});
-});
-
-describe('OmnibusQueryGenerator - constructPayload()', () => {
-  test('Test1', async () => {});
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  queryGenerator.setAttributes(params);
+  test('should return promise if fields is supplied', async () => {
+    await expect(queryGenerator.sqlFactory('select * from alerts.status')).resolves.toMatchObject(
+      omnibusSuccessGetJSON,
+    );
+  });
 });
 
 describe('OmnibusQueryGenerator - constructSearchParams()', () => {
-  test('Test1', async () => {});
+  const queryGenerator = new OmnibusQueryGenerator(fetchMock);
+  test('should return correct searchParams - filter:integers', async () => {
+    expect(queryGenerator.constructSearchParams({ filter: { Severity: 5 } })).toMatchObject({
+      filter: 'Severity=5',
+    });
+  });
+  test('should return correct searchParams - filter:strings', async () => {
+    expect(queryGenerator.constructSearchParams({ filter: { Node: 'omnihost' } })).toMatchObject({
+      filter: "Node='omnihost'",
+    });
+  });
+  test('should return correct searchParams - collist', async () => {
+    expect(queryGenerator.constructSearchParams({ collist: ['Node,Summary'] })).toMatchObject({
+      collist: 'Node,Summary',
+    });
+  });
+  test('should return correct searchParams - orderby', async () => {
+    expect(queryGenerator.constructSearchParams({ orderby: { Node: 'ASC' } })).toMatchObject({
+      orderby: 'Node ASC',
+    });
+    expect(queryGenerator.constructSearchParams({ orderby: { Node: 'DESC' } })).toMatchObject({
+      orderby: 'Node DESC',
+    });
+  });
+  test('should return correct searchParams - mixed', async () => {
+    const mixedQueryParams = {
+      filter: { Node: 'omnihost' },
+      collist: ['Node,Summary'],
+      orderby: { Node: 'DESC' },
+    };
+    expect(queryGenerator.constructSearchParams(mixedQueryParams)).toMatchObject({
+      filter: "Node='omnihost'",
+      collist: 'Node,Summary',
+      orderby: 'Node DESC',
+    });
+  });
 });
