@@ -2,7 +2,8 @@
 
 [![npm version](https://badge.fury.io/js/node-omnibus.svg)](https://badge.fury.io/js/node-omnibus)
 [![node-omnibus](https://circleci.com/gh/FredrikLandstrom/node-omnibus.svg?branch=master&style=shield)](https://circleci.com/gh/FredrikLandstrom/node-omnibus)
-[![codecov](https://codecov.io/gh/FredrikLandstrom/node-omnibus/branch/master/graph/badge.svg)](https://codecov.io/gh/FredrikLandstrom/node-omnibus)
+![npm](https://img.shields.io/npm/dw/node-omnibus)
+![GitHub last commit](https://img.shields.io/github/last-commit/fredriklandstrom/node-omnibus)
 
 node-omnibus is a client library for accessing the OMNIbus Objectserver database, from [Node.js](https://nodejs.org). It uses the Objectserver [REST API](http://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/omnibus/wip/api/reference/omn_api_http_httpinterface.html?lang=en) and supports IBM Tivoli Netcool OMNIbus version 7.4 and above.
 
