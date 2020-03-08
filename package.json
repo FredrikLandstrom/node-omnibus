@@ -16,9 +16,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jest --verbose",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test": "jest --verbose --silent",
+    "test:watch": "jest --watch --silent",
+    "test:coverage": "jest --coverage --silent",
     "test:clearCache": "jest --clearCache",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/"
   },

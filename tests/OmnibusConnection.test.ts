@@ -210,3 +210,19 @@ describe('OmnibusConnection - sqlFactory()', () => {
     expect(connection.sqlFactory('select * from alerts.status')).resolves.toMatchObject(omnibusSuccessGetJSON);
   });
 });
+
+describe('OmnibusConnection - (old) query()', () => {
+  test('should return omnibus response', () => {
+    params.host = 'omnibussuccess';
+    const connection = new OmnibusConnection(fetchMock, params);
+    expect(connection.query('select * from alerts.status')).resolves.toMatchObject(omnibusSuccessGetJSON);
+  });
+});
+
+describe('OmnibusConnection - (old) sqlCommand()', () => {
+  test('should return omnibus response', () => {
+    params.host = 'omnibussuccess';
+    const connection = new OmnibusConnection(fetchMock, params);
+    expect(connection.sqlCommand('select * from alerts.status')).resolves.toMatchObject(omnibusSuccessGetJSON);
+  });
+});
