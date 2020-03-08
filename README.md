@@ -2,8 +2,9 @@
 
 [![npm version](https://badge.fury.io/js/node-omnibus.svg)](https://badge.fury.io/js/node-omnibus)
 [![node-omnibus](https://circleci.com/gh/FredrikLandstrom/node-omnibus.svg?branch=master&style=shield)](https://circleci.com/gh/FredrikLandstrom/node-omnibus)
+[![codecov](https://codecov.io/gh/FredrikLandstrom/node-omnibus/branch/master/graph/badge.svg)](https://codecov.io/gh/FredrikLandstrom/node-omnibus)
 
-node-omnibus is a client library for accessing the OMNIbus Objectserver database, from [Node.js](https://nodejs.org). It uses the Objectser er [REST API](http://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/omnibus/wip/api/reference/omn_api_http_httpinterface.html?lang=en) and supports IBM Tivoli Netcool OMNIbus version 7.4 and above.
+node-omnibus is a client library for accessing the OMNIbus Objectserver database, from [Node.js](https://nodejs.org). It uses the Objectserver [REST API](http://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/omnibus/wip/api/reference/omn_api_http_httpinterface.html?lang=en) and supports IBM Tivoli Netcool OMNIbus version 7.4 and above.
 
 > '[IBM Tivoli Netcool OMNIbus](http://www.ibm.com/software/products/ibmtivolinetcoolomnibus) provides near real-time service assurance for business infrastructure, applications, servers, network devices and protocols, internet protocols, storage and security devices' (from ibm.com)
 
@@ -21,6 +22,7 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
   - [Working with the model](#workingwithmodel)
   - [Working with the connection](#workingwithconnection)
 - [Javascript syntax](#javascript-syntax)
+- [Common Errors](#common-errors)
 - [Contributing](#contributing)
 - [Changelog](#changelog)
 - [License](#license)
@@ -121,12 +123,12 @@ A successful request returns a response object in the following JSON structure:
 #### Example loop on the response object
 
 ```javascript
-omnibusConnection.sqlFactory('select * from alerts.status').then(res=> {
-	// loop and console log Node and Summary
-	res.rowset.rows.forEach(event,index){
-		const {node,summary} = event
-		console.log("Node: "+node+", Summary: "+summary)
-	}
+omnibusConnection.sqlFactory('select * from alerts.status').then(res => {
+  // loop and console log Node and Summary
+  res.rowset.rows.forEach((event, index) => {
+    const { Node, Summary } = event;
+    console.log('Node: ' + Node + ', Summary: ' + Summary);
+  });
 });
 
 // Result:
@@ -189,7 +191,7 @@ omnibusConnection
 If no query parameters is sent with the request, the whole dataset will be returned.
 
 ```javascript
-omnibusConnection.find().then(res => console.log); //equals select * from alerts.status
+omnibusConnection.find().then(res => console.log(res)); //equals select * from alerts.status
 ```
 
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
@@ -202,11 +204,15 @@ Performs a get request to the objectserver with an arbitrary SQL command.
 
 ```javascript
 // create the query
-const myQuery = 'select Node,Severity,Summary from alerts.status where Node='switch01' ORDER BY Node ASC'
+const myQuery =
+  "select Node, Severity, Summary from alerts.status where Node='switch01' ORDER BY Node ASC";
 
 // send to objectserver and print result
-omnibusConnection.sqlQuery(myQuery).then(res=>{
-	console.log(res);
+omnibusConnection
+  .sqlFactory(myQuery)
+  .then(res => {
+    console.log(res);
+  })
 });
 ```
 
@@ -330,7 +336,9 @@ omnibusConnection.syncModel();
 If you need to check the model you can fetch the local copy of the model.
 
 ```javascript
-const myModel = omnibusConnection.getModel();
+omnibusConnection.getModel().then(model => {
+  console.log(model);
+});
 ```
 
 <a id="workingwithconnection"></a>
@@ -399,12 +407,16 @@ const myURL = omnibusConnection.getUrl();
 This manual uses the new ES6 Arrow functions but if you prefer to use the old style, use the example below
 
 ```javascript
-omnibusConnection.find(res => console.log(res)).catch(err => console.log(err));
+omnibusConnection
+  .find()
+  .then(res => console.log(res))
+  .catch(err => console.log(err));
 ```
 
 ```javascript
 omnibusConnection
-  .find(function(res) {
+  .find()
+  .then(function(res) {
     console.log(res);
   })
   .catch(function(err) {
@@ -418,16 +430,46 @@ Allthough this manual use .then().catch() for some operations feel free to use a
 
 ```javascript
 // using .then()
-function getAlertsAlertsStatus() {
-  omnibusConnection.find().then(res, function() {
-    return res;
+function getAlertsStatus() {
+  omnibusConnection.find().then(function(res) {
+    console.log(res);
   });
 }
 
+getAlertsStatus();
+
 // using ES8 async/await
 async function getAlertsStatus() {
-  return await omnibusConnection.find();
+  console.log(await omnibusConnection.find());
 }
+
+getAlertsStatus();
+```
+
+## Common Errors
+
+### UnhandledPromiseRejectionWarning
+
+Example:
+
+```bash
+(node:90251) UnhandledPromiseRejectionWarning: #<Object>
+(node:90251) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)
+(node:90251) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+```
+
+This error indicates that there is a Promise rejection but it is not handled correctly.
+Update your code to handle errors, example:
+
+```javascript
+omnibusConnection
+  .find()
+  .then(res => {
+    console.log(res);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 ```
 
 ## Contributing
