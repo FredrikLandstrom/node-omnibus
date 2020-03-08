@@ -92,11 +92,7 @@ export class OmnibusQueryGenerator {
           });
           return Promise.resolve(this._model);
         } else {
-          return Promise.reject({
-            url: this._url.href,
-            status: 'ERRORINSYNC',
-            statusText: 'Error in sync with the objectserver',
-          });
+          throw new OmnibusError('ERRORINSYNC', 'syncModel() did not recieve response');
         }
       })
       .catch(err => {
@@ -136,12 +132,7 @@ export class OmnibusQueryGenerator {
     }
   }
 
-  setRequestInit(parameters: RequestInit): OmnibusQueryGenerator {
-    parameters = parameters || {};
-    return this;
-  }
-
-  setAttributes(parameters: OmnibusConnectionParameters): OmnibusQueryGenerator {
+  setAttributes(parameters?: OmnibusConnectionParameters): OmnibusQueryGenerator {
     parameters = parameters || {};
     Object.assign(this._parameters, parameters);
 
@@ -197,14 +188,16 @@ export class OmnibusQueryGenerator {
     return this._parameters;
   }
 
-  async find(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+  find(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
     // performs the a query of method GET
+
+    // Remove search params from the URL in case they exist
+    this._url.search = '';
 
     let _omnibusSearchParams = this.constructSearchParams(queryparams);
     this._url.searchParams.append('filter', _omnibusSearchParams.filter);
     this._url.searchParams.append('collist', _omnibusSearchParams.collist);
     this._url.searchParams.append('orderby', _omnibusSearchParams.orderby);
-
     // we are performing a get, no need for body
     this._requestInit.method = 'get';
     this._requestInit.body = null;
@@ -213,18 +206,22 @@ export class OmnibusQueryGenerator {
     return this._queryInterface.send(this._url.href, this._requestInit);
   }
 
-  destroy(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+  async destroy(queryparams?: OmnibusQueryParameters): Promise<OmnibusResponse> {
     // performs the query of method DELETE
 
     if (!queryparams) {
       // Query params is required
-      return Promise.reject('ERROR: You need filter as a parameter to .destroy()');
+      throw new OmnibusError('DESTROYFILTERMISSING', 'Parameter "filter" is missing');
     }
 
     if (!queryparams.filter) {
       // Do not delete everything from the OS, require a filter
-      return Promise.reject(new OmnibusError('DESTROYFILTERMISSING', 'Parameter "filter" is missing'));
+      //throw new OmnibusError('DESTROYFILTERMISSING', 'Parameter "filter" is missing');
+      throw new OmnibusError('DESTROYFILTERMISSING', 'Parameter "filter" is missing');
     }
+
+    // Remove search params from the URL in case they exist
+    this._url.search = '';
 
     let _omnibusSearchParams = this.constructSearchParams(queryparams);
     this._url.searchParams.append('filter', _omnibusSearchParams.filter);
@@ -237,7 +234,7 @@ export class OmnibusQueryGenerator {
     return this._queryInterface.send(this._url.href, this._requestInit);
   }
 
-  async update(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+  async update(queryparams?: OmnibusQueryParameters): Promise<OmnibusResponse> {
     // Check if update statement was sent
     let _payload = <OmnibusPayload>{};
 
@@ -250,6 +247,13 @@ export class OmnibusQueryGenerator {
     } else {
       throw new OmnibusError('UPDATEPARAMETERMISSING', '.update() is missing required parameters');
     }
+
+    if (!queryparams.filter) {
+      throw new OmnibusError('UPDATEFILTERMISSING', 'Parameter "filter" is missing');
+    }
+
+    // Remove search params from the URL in case they exist
+    this._url.search = '';
 
     let _omnibusSearchParams = this.constructSearchParams(queryparams);
 
@@ -265,9 +269,9 @@ export class OmnibusQueryGenerator {
     return this._queryInterface.send(this._url.href, this._requestInit);
   }
 
-  async insert(fields: OmnibusField): Promise<OmnibusResponse> {
+  async insert(fields?: OmnibusField): Promise<OmnibusResponse> {
     if (!fields) {
-      return Promise.reject(new OmnibusError('INSERTPARAMETERMISSING', '.insert() is missing required parameters'));
+      throw new OmnibusError('INSERTPARAMETERMISSING', '.insert() is missing required parameters');
     }
     const _payload = await this.constructPayload(fields);
 
@@ -346,8 +350,6 @@ export class OmnibusQueryGenerator {
           _filter = `${key}=${value}`;
         }
       }
-      // add filter to URL
-      this._url.searchParams.append('filter', _filter);
     }
 
     // check if a collist is supplied
@@ -358,7 +360,6 @@ export class OmnibusQueryGenerator {
 
     // check if a orderby is supplied
     if (_queryparams.orderby) {
-      let _orderby = ''; // default
       for (let [key, value] of Object.entries(_queryparams.orderby)) {
         _orderby = `${key} ${value}`;
       }

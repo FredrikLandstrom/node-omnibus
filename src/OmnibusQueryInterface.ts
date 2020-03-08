@@ -1,3 +1,4 @@
+// OmnibusQueryInterface.ts:  File to handle all communication with server via fetch
 import { OmnibusResponse } from './OmnibusQueryGenerator';
 
 export class OmnibusQueryInterface {
@@ -16,6 +17,7 @@ export class OmnibusQueryInterface {
         }
       })
       .then((json: any) => {
+        // Send successful request json
         return this.formatResponse(json, null);
       })
       .catch((error: any) => {
