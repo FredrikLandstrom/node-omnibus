@@ -392,9 +392,10 @@ Returns the last used URL to communicate with the Objectserver
 const myURL = omnibusConnection.getUrl();
 ```
 
-##Javascript syntax
+## Javascript Syntax
 
-###Arrow Functions
+### Arrow Functions
+
 This manual uses the new ES6 Arrow functions but if you prefer to use the old style, use the example below
 
 ```javascript
@@ -411,7 +412,8 @@ omnibusConnection
   });
 ```
 
-###Async / Await
+### Async / Await
+
 Allthough this manual use .then().catch() for some operations feel free to use async/await where appropriate.
 
 ```javascript
