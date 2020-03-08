@@ -72,3 +72,7 @@
 
 - Documentation update
   - Code errors fixed
+
+## Version 0.5.4 - March 8, 2020
+
+- Added badges to main documentation
