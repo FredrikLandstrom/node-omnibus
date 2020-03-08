@@ -56,13 +56,25 @@ export default class OmnibusConnection {
   }
 
   // Fix TYPE to OmnibusResponseObject
-  async insert(insertFields: { [index: string]: any }): Promise<{}> {
+  async insert(insertFields: { [index: string]: any }): Promise<OmnibusResponse> {
     // Performs the query of method PUT
     return this.queryGenerator.insert(insertFields);
   }
 
   sqlFactory(sqlQuery: string): Promise<OmnibusResponse> {
     // Send SQL query direct to the connection
+    return this.queryGenerator.sqlFactory(sqlQuery);
+  }
+
+  // Fallback for users of old library
+  query(sqlQuery: string): Promise<OmnibusResponse> {
+    console.warn('Function query is deprecated.');
+    return this.queryGenerator.sqlFactory(sqlQuery);
+  }
+
+  // Fallback for users of old library
+  sqlCommand(sqlQuery: string): Promise<OmnibusResponse> {
+    console.warn('Function sqlQuery is deprecated');
     return this.queryGenerator.sqlFactory(sqlQuery);
   }
 }
