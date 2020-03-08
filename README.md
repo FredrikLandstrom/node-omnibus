@@ -35,7 +35,7 @@ npm install node-omnibus --save
 
 ## OMNIbus REST configuration
 
-Open the propertyfile for the Objectserver that should provide the REST interface
+Open the property-file for the Objectserver that should provide the REST interface
 
 ```
 vi $OMNIHOME/etc/NCOMS.props
