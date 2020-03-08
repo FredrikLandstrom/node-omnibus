@@ -264,6 +264,7 @@ You can only use one filter expression. AND or OR is not supported. To use more 
 
 ### .update(Record)
 
+TODO: must explain what filter does
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
 ## Adding records (INSERT)
