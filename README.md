@@ -393,7 +393,6 @@ const myURL = omnibusConnection.getUrl();
 ```
 
 ##Javascript syntax
-
 ###Arrow Functions
 This manual uses the new ES6 Arrow functions but if you prefer to use the old style, use the example below
 
