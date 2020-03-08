@@ -4,19 +4,13 @@ jobs:
     working_directory: ~/node-omnibus
     docker:
       - image: circleci/node:10.16.3
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm test
-  build:
-    docker:
       - image: circleci/node:10.0-browsers
     steps:
       - checkout
       - run: npm install
+      - run: npm test
       - run:
-          name: "Run Jest and Collect Coverage Reports"
+          name: 'Run Jest and Collect Coverage Reports'
           command: jest --collectCoverage=true
       - store_artifacts:
           path: coverage
-
