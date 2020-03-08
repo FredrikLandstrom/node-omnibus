@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/node-omnibus.svg)](https://badge.fury.io/js/node-omnibus)
 [![node-omnibus](https://circleci.com/gh/FredrikLandstrom/node-omnibus.svg?branch=master&style=shield)](https://circleci.com/gh/FredrikLandstrom/node-omnibus)
+[![codecov](https://codecov.io/gh/FredrikLandstrom/node-omnibus/branch/master/graph/badge.svg)](https://codecov.io/gh/FredrikLandstrom/node-omnibus)
 ![npm](https://img.shields.io/npm/dw/node-omnibus)
 ![GitHub last commit](https://img.shields.io/github/last-commit/fredriklandstrom/node-omnibus)
 
