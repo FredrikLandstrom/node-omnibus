@@ -458,7 +458,3 @@ IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Cor
 [npm-url]: https://www.npmjs.com/package/node-omnibus
 [install-size-image]: https://flat.badgen.net/packagephobia/install/node-omnibus
 [install-size-url]: https://packagephobia.now.sh/result?p=node-omnibus
-
-```
-
-```
