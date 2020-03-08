@@ -1,7 +1,7 @@
 # node-omnibus
 
-[![npm version][npm-image]][npm-url]
-[![install size][install-size-image]][install-size-url]
+[![npm version](https://badge.fury.io/js/node-omnibus.svg)](https://badge.fury.io/js/node-omnibus)
+[![node-omnibus](https://circleci.com/gh/FredrikLandstrom/node-omnibus.svg?branch=master&style=shield)](https://circleci.com/gh/FredrikLandstrom/node-omnibus)
 
 node-omnibus is a client library for accessing the OMNIbus Objectserver database, from [Node.js](https://nodejs.org). It uses the Objectser er [REST API](http://www-01.ibm.com/support/knowledgecenter/SSSHTQ_8.1.0/com.ibm.netcool_OMNIbus.doc_8.1.0/omnibus/wip/api/reference/omn_api_http_httpinterface.html?lang=en) and supports IBM Tivoli Netcool OMNIbus version 7.4 and above.
 
@@ -454,7 +454,3 @@ IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Cor
 [license]: LICENSE
 [issue-tracker]: https://github.com/fredriklandstrom/node-omnibus/issues
 [changelog]: CHANGELOG.md
-[npm-image]: https://badgen.net/npm/v/node-omnibus
-[npm-url]: https://www.npmjs.com/package/node-omnibus
-[install-size-image]: https://flat.badgen.net/packagephobia/install/node-omnibus
-[install-size-url]: https://packagephobia.now.sh/result?p=node-omnibus
