@@ -53,13 +53,17 @@
 - Errorhandling update
 - Promise / Reject update on error
 
-## Version 0.5.0 - March 8, 2029
+## Version 0.5.0 - March 8, 2020
 
 - Rewrite the internals to typescript
 - Complete unittesting
 - Documentation updates
 - Errorhandling
 
-## Version 0.5.1 - March 8, 2029
+## Version 0.5.1 - March 8, 2020
+
+- Documentation update
+
+## Version 0.5.2 - March 8, 2020
 
 - Documentation update

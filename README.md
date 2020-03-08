@@ -140,7 +140,7 @@ If the query was unsuccessful the promise will reject with a error object in the
 
 ```javascript
 {
-  url: 'http://omnihost:8080/objectserver/restapi/sql/factory",
+  url: 'http://omnihost:8080/objectserver/restapi/sql/factory',
   status: 401,
   statusText: 'Authorization Required',
   explanation: 'Check username and password'
