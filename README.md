@@ -21,6 +21,19 @@ npm install node-omnibus --save
   - [Quick start](#quick-start)
   - [The response object](#the-response-object)
   - [The error object](#the-error-object)
+  - [The error object](#the-error-object)
+  - [Querying the Objectserver (SELECT)](#querying)
+  - [Deleting records (DELETE)](#delete)
+  - [Updating records (UPDATE)](#update)
+  - [Inserting records (INSERT)](#insert)
+  - [Working with the model](#workingwithmodel)
+  - [Working with the connection](#workingwithconnection)
+- [Javascript syntax](#javascript-syntax)
+- [Contributing](#contributing)
+- [Changelog](#changelog)
+- [License](#license)
+- [Feedback](#feedback)
+- [Trademark information](#trademark-information)
 
 ## OMNIbus REST configuration
 
@@ -155,6 +168,8 @@ omnibusConnection
   });
 ```
 
+<a id="querying"></a>
+
 ## Querying the ObjectServer (SELECT)
 
 ### .find(OmnibusQueryParams)
@@ -199,6 +214,8 @@ omnibusConnection.sqlQuery(myQuery).then(res=>{
 
 _Note: You do not need to set a query path for .sqlFactory method._
 
+<a id="delete"></a>
+
 ## Deleting records (DELETE)
 
 ### .destroy(OmnibusQueryParams)
@@ -230,6 +247,8 @@ omnibusConnection
 
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
+<a id="update"></a>
+
 ## Updating records (UPDATE)
 
 ### .update(OmnibusQueryParams)
@@ -260,7 +279,9 @@ omnibusConnection
 
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
-## Adding records (INSERT)
+<a id="insert"></a>
+
+## Inserting records (INSERT)
 
 ### .insert(Fields)
 
@@ -276,6 +297,8 @@ omnibusConnection
   })
   .then(res => console.log(res));
 ```
+
+<a id="workingwithmodel"></a>
 
 ## Working with the model
 
@@ -311,6 +334,8 @@ If you need to check the model you can fetch the local copy of the model.
 ```javascript
 const myModel = omnibusConnection.getModel();
 ```
+
+<a id="workingwithconnection"></a>
 
 ## Working with the connection
 
@@ -377,8 +402,6 @@ This manual uses the new ES6 Arrow functions but if you prefer to use the old st
 ```javascript
 omnibusConnection.find(res => console.log(res)).catch(err => console.log(err));
 ```
-
-**Normal Function Example**
 
 ```javascript
 omnibusConnection
