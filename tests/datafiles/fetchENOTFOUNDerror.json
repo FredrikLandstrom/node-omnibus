@@ -1,0 +1,6 @@
+{
+  "message": "request to http://omnihost:8080/objectserver/restapi/alerts/status failed, reason: getaddrinfo ENOTFOUND omnihost omnihost:8080",
+  "type": "system",
+  "errno": "ENOTFOUND",
+  "code": "ENOTFOUND"
+}

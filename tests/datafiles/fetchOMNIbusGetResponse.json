@@ -1,0 +1,476 @@
+{
+  "rowset": {
+    "osname": "AGG_P",
+    "affectedRows": 2,
+    "coldesc": [
+      {
+        "name": "Identifier",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "Serial",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Node",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "NodeAlias",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "Manager",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "Agent",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "AlertGroup",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "AlertKey",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "Severity",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Summary",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "StateChange",
+        "type": "utc",
+        "size": 4
+      },
+      {
+        "name": "FirstOccurrence",
+        "type": "utc",
+        "size": 4
+      },
+      {
+        "name": "LastOccurrence",
+        "type": "utc",
+        "size": 4
+      },
+      {
+        "name": "InternalLast",
+        "type": "utc",
+        "size": 4
+      },
+      {
+        "name": "Poll",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Type",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Tally",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Class",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Grade",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Location",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "OwnerUID",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "OwnerGID",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Acknowledged",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Flash",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "EventId",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "ExpireTime",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "ProcessReq",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "SuppressEscl",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "Customer",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "Service",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "PhysicalSlot",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "PhysicalPort",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "PhysicalCard",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "TaskList",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "NmosSerial",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "NmosObjInst",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "NmosCauseType",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "NmosDomainName",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "NmosEntityId",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "NmosManagedStatus",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "NmosEventMap",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "LocalNodeAlias",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "LocalPriObj",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "LocalSecObj",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "LocalRootObj",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "RemoteNodeAlias",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "RemotePriObj",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "RemoteSecObj",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "RemoteRootObj",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "X733EventType",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "X733ProbableCause",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "X733SpecificProb",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "X733CorrNotif",
+        "type": "string",
+        "size": 255
+      },
+      {
+        "name": "ServerName",
+        "type": "string",
+        "size": 64
+      },
+      {
+        "name": "ServerSerial",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "URL",
+        "type": "string",
+        "size": 1024
+      },
+      {
+        "name": "ExtendedAttr",
+        "type": "string",
+        "size": 4096
+      },
+      {
+        "name": "OldRow",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "ProbeSubSecondId",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "BSM_Identity",
+        "type": "string",
+        "size": 1024
+      },
+      {
+        "name": "Contact",
+        "type": "string",
+        "size": 30
+      },
+      {
+        "name": "SLA",
+        "type": "string",
+        "size": 10
+      },
+      {
+        "name": "AffectedUsers",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "TTId",
+        "type": "string",
+        "size": 10
+      },
+      {
+        "name": "TTStatus",
+        "type": "integer",
+        "size": 4
+      },
+      {
+        "name": "RowSerial",
+        "type": "integer",
+        "size": 4
+      }
+    ],
+    "rows": [
+      {
+        "Identifier": "mttrapd@hostname.com: Heartbeat Message",
+        "Serial": 7651,
+        "Node": "hostname.domain.com",
+        "NodeAlias": "",
+        "Manager": "ProbeWatch",
+        "Agent": "mttrapd",
+        "AlertGroup": "",
+        "AlertKey": "mttrapd",
+        "Severity": 1,
+        "Summary": "mttrapd probe on hostname.domain.com: Heartbeat Message",
+        "StateChange": 1579767242,
+        "FirstOccurrence": 1579767242,
+        "LastOccurrence": 1579767242,
+        "InternalLast": 1579767242,
+        "Poll": 0,
+        "Type": 0,
+        "Tally": 1,
+        "Class": 0,
+        "Grade": 0,
+        "Location": "",
+        "OwnerUID": 65534,
+        "OwnerGID": 1,
+        "Acknowledged": 0,
+        "Flash": 0,
+        "EventId": "",
+        "ExpireTime": 0,
+        "ProcessReq": 0,
+        "SuppressEscl": 0,
+        "Customer": "",
+        "Service": "",
+        "PhysicalSlot": 0,
+        "PhysicalPort": 0,
+        "PhysicalCard": "",
+        "TaskList": 0,
+        "NmosSerial": "",
+        "NmosObjInst": 0,
+        "NmosCauseType": 0,
+        "NmosDomainName": "",
+        "NmosEntityId": 0,
+        "NmosManagedStatus": 0,
+        "NmosEventMap": "",
+        "LocalNodeAlias": "",
+        "LocalPriObj": "",
+        "LocalSecObj": "",
+        "LocalRootObj": "",
+        "RemoteNodeAlias": "",
+        "RemotePriObj": "",
+        "RemoteSecObj": "",
+        "RemoteRootObj": "",
+        "X733EventType": 0,
+        "X733ProbableCause": 0,
+        "X733SpecificProb": "",
+        "X733CorrNotif": "",
+        "ServerName": "AGG_P",
+        "ServerSerial": 7651,
+        "URL": "",
+        "ExtendedAttr": "",
+        "OldRow": 0,
+        "ProbeSubSecondId": 0,
+        "BSM_Identity": "",
+        "Contact": "",
+        "SLA": "",
+        "AffectedUsers": 0,
+        "TTId": "",
+        "TTStatus": 0,
+        "RowSerial": 0
+      },
+      {
+        "Identifier": "syslog@hostname.domain.com: No syslog messages received for 60 seconds",
+        "Serial": 7650,
+        "Node": "hostname.domain.com",
+        "NodeAlias": "",
+        "Manager": "ProbeWatch",
+        "Agent": "syslog",
+        "AlertGroup": "",
+        "AlertKey": "syslog",
+        "Severity": 1,
+        "Summary": "syslog probe on hostname.domain.com: No syslog messages received for 60 seconds",
+        "StateChange": 1579767241,
+        "FirstOccurrence": 1579767241,
+        "LastOccurrence": 1579767241,
+        "InternalLast": 1579767241,
+        "Poll": 0,
+        "Type": 0,
+        "Tally": 1,
+        "Class": 0,
+        "Grade": 0,
+        "Location": "",
+        "OwnerUID": 65534,
+        "OwnerGID": 1,
+        "Acknowledged": 0,
+        "Flash": 0,
+        "EventId": "",
+        "ExpireTime": 0,
+        "ProcessReq": 0,
+        "SuppressEscl": 0,
+        "Customer": "",
+        "Service": "",
+        "PhysicalSlot": 0,
+        "PhysicalPort": 0,
+        "PhysicalCard": "",
+        "TaskList": 0,
+        "NmosSerial": "",
+        "NmosObjInst": 0,
+        "NmosCauseType": 0,
+        "NmosDomainName": "",
+        "NmosEntityId": 0,
+        "NmosManagedStatus": 0,
+        "NmosEventMap": "",
+        "LocalNodeAlias": "",
+        "LocalPriObj": "",
+        "LocalSecObj": "",
+        "LocalRootObj": "",
+        "RemoteNodeAlias": "",
+        "RemotePriObj": "",
+        "RemoteSecObj": "",
+        "RemoteRootObj": "",
+        "X733EventType": 0,
+        "X733ProbableCause": 0,
+        "X733SpecificProb": "",
+        "X733CorrNotif": "",
+        "ServerName": "AGG_P",
+        "ServerSerial": 7650,
+        "URL": "",
+        "ExtendedAttr": "",
+        "OldRow": 0,
+        "ProbeSubSecondId": 0,
+        "BSM_Identity": "",
+        "Contact": "",
+        "SLA": "",
+        "AffectedUsers": 0,
+        "TTId": "",
+        "TTStatus": 0,
+        "RowSerial": 0
+      }
+    ]
+  }
+}

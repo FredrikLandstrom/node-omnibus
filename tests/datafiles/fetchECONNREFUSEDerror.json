@@ -1,0 +1,6 @@
+{
+  "message": "request to http://omnihost:8080/objectserver/restapi/alerts/status failed, reason: connect ECONNREFUSED 10.10.10.10:8080",
+  "type": "system",
+  "errno": "ECONNREFUSED",
+  "code": "ECONNREFUSED"
+}

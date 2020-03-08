@@ -61,3 +61,16 @@ Temporary Items
 node_modules/
 npm-debug.log
 dev
+/lib
+
+# misc
+.DS_Store
+.env*
+.test/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage in Jest
+coverage
