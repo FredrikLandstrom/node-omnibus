@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.2
 jobs:
   build:
     working_directory: ~/node-omnibus
@@ -13,3 +15,5 @@ jobs:
           command: npm run test:coverage
       - store_artifacts:
           path: coverage
+      - codecov/upload:
+          file: { { coverage_report_filepath } }
