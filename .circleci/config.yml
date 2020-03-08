@@ -4,8 +4,7 @@ jobs:
     working_directory: ~/node-omnibus
     docker:
       - image: circleci/node:10.16.3
-
-  steps:
-    - checkout
-    - run: npm install
-    - run: npm test
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
