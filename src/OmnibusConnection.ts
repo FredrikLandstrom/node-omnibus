@@ -41,12 +41,12 @@ export default class OmnibusConnection {
     return this.queryGenerator.getModel();
   }
 
-  find(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+  async find(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
     // This will return the actual find
     return this.queryGenerator.find(queryparams);
   }
 
-  destroy(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
+  async destroy(queryparams: OmnibusQueryParameters): Promise<OmnibusResponse> {
     return this.queryGenerator.destroy(queryparams);
   }
 
