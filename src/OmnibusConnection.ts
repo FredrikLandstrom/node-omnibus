@@ -28,16 +28,16 @@ export default class OmnibusConnection {
     // Set connection parameters on the queryGenerator object
   }
 
-  get getAttributes(): OmnibusConnectionParameters {
-    return this.queryGenerator.getAttributes;
+  getAttributes(): OmnibusConnectionParameters {
+    return this.queryGenerator.getAttributes();
     // Returns all the connection parameters from the queryGenerator object
   }
 
-  get getUrl(): string {
-    return this.queryGenerator.getUrl;
+  getUrl(): string {
+    return this.queryGenerator.getUrl();
   }
 
-  async getModel(): Promise<OmnibusModel> {
+  getModel(): Promise<OmnibusModel> {
     return this.queryGenerator.getModel();
   }
 

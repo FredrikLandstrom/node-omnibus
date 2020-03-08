@@ -94,13 +94,13 @@ describe('OmnibusConnection Class #2 - Connection Parameters', () => {
   test('URL when not using SSL should contain http://', () => {
     testParams.SSLEnable = false;
     connection = new OmnibusConnection(fetchMock, testParams);
-    expect(connection.getUrl).toMatch('http://omnihost:8080/objectserver/restapi');
+    expect(connection.getUrl()).toMatch('http://omnihost:8080/objectserver/restapi');
   });
 
   test('URL when using SSL should contain https://', () => {
     testParams.SSLEnable = true;
     connection = new OmnibusConnection(fetchMock, testParams);
-    expect(connection.getUrl).toMatch('https://omnihost:8080/objectserver/restapi');
+    expect(connection.getUrl()).toMatch('https://omnihost:8080/objectserver/restapi');
   });
 });
 
@@ -129,13 +129,13 @@ describe('OmnibusConnection - setQueryPath()', () => {
     }).toThrow('Incorrect Endpoint format : supplied path [alerts_status] is incorrect');
   });
   test('should convert endpoint to correct format', () => {
-    expect(connection.setQueryPath('alerts.status').getUrl).toMatch('alerts/status');
-    expect(connection.setQueryPath('alerts/status').getUrl).toMatch('alerts/status');
-    expect(connection.setQueryPath('').getUrl).toMatch('alerts/status');
+    expect(connection.setQueryPath('alerts.status').getUrl()).toMatch('alerts/status');
+    expect(connection.setQueryPath('alerts/status').getUrl()).toMatch('alerts/status');
+    expect(connection.setQueryPath('').getUrl()).toMatch('alerts/status');
   });
 });
 
-describe('OmnibusConnection - set & getAttributes()', () => {
+describe('OmnibusConnection - set & getAttributes()()', () => {
   const connection = new OmnibusConnection(fetchMock, params);
   const newAttributes = {
     host: 'omnihostNew',
@@ -147,15 +147,15 @@ describe('OmnibusConnection - set & getAttributes()', () => {
   };
   test('should set and get attributes', () => {
     connection.setAttributes(newAttributes);
-    expect(connection.getAttributes).toMatchObject(newAttributes);
+    expect(connection.getAttributes()).toMatchObject(newAttributes);
   });
 });
 
-describe('OmnibusConnection - getUrl()', () => {
+describe('OmnibusConnection - getUrl()()', () => {
   test('url can be read', async () => {
     params.host = 'omnibussuccess';
     const connection = new OmnibusConnection(fetchMock, params);
-    expect(connection.getUrl).toMatch('http://omnibussuccess');
+    expect(connection.getUrl()).toMatch('http://omnibussuccess');
   });
 });
 

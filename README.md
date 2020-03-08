@@ -13,26 +13,14 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
 npm install node-omnibus --save
 ```
 
-##Arrow functions
-This manual uses the new ES6 Arrow functions but if you prefere to use the old style, use the example below
+## Table of Content
 
-**ES6 Arrow Function Example**
-
-```javascript
-omnibusConnection.find(res => console.log(res)).catch(err => console.log(err));
-```
-
-**Normal Function Example**
-
-```javascript
-omnibusConnection
-  .find(function(res) {
-    console.log(res);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
-```
+- [OMNIbus rest configuration](#omnibus-rest-configuration)
+- [Usage](#usage)
+  - [Creating the connection](#creating-the-connection)
+  - [Quick start](#quick-start)
+  - [The response object](#the-response-object)
+  - [The error object](#the-error-object)
 
 ## OMNIbus REST configuration
 
@@ -141,9 +129,10 @@ If the query was unsuccessful the promise will reject with a error object in the
 
 ```javascript
 {
-	url: 'http://omnihost:8080/objectserver/restapi/sql/factory",
-	status: 401
-	statusText: 'Authorization Required'
+  url: 'http://omnihost:8080/objectserver/restapi/sql/factory",
+  status: 401,
+  statusText: 'Authorization Required',
+  explanation: 'Check username and password'
 }
 ```
 
@@ -166,30 +155,6 @@ omnibusConnection
   });
 ```
 
-## Query Path
-
-The default query path (database/table) is set to alerts.status but can easily be changed by the setQueryPath method on the connection object.
-
-```javascript
-// change querypath to alerts.details
-omnibusConnection.setQueryPath('alerts.details');
-```
-
-You can also prepare many different connections with different query path when you create the connection.
-
-```javascript
-const statusDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.status');
-const detailsDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.details');
-const journalDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.journal');
-
-// print all events
-statusDb.find().then(res => console.log(res));
-// print all details
-detailsDb.find().then(res => console.log(res));
-// print all journals
-journalDb.find().then(res => console.log(res));
-```
-
 ## Querying the ObjectServer (SELECT)
 
 ### .find(OmnibusQueryParams)
@@ -208,9 +173,14 @@ omnibusConnection
 // Equals: select Node, Severity, Summary from alerts.status where Node='switch01' ORDER BY Node ASC
 ```
 
+If no query parameters is sent with the request, the whole dataset will be returned.
+
+```javascript
+omnibusConnection.find().then(res => console.log); //equals select * from alerts.status
+```
+
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
-#markdown-header-test
 <a id="sqlFactory"></a>
 
 ### .sqlFactory(sqlQuery)
@@ -262,61 +232,179 @@ You can only use one filter expression. AND or OR is not supported. To use more 
 
 ## Updating records (UPDATE)
 
-### .update(Record)
+### .update(OmnibusQueryParams)
 
-TODO: must explain what filter does
+Performs a PATCH (UPDATE) request to the objectserver with required filter and uddate query parameters. The filter parameter is required to prevent accidental update of the entire table.
+
+```javascript
+omnibusConnection
+  .update({
+    filter: { Node: 'omnihost' },
+    update: { Node: 'new_omnihost' },
+  })
+  .then(res => console.log(res));
+
+// Equals: update alerts.status (Node) values ('new_omnihost') where Node='omnihost'
+```
+
+To update every record, just provide an empty filter.
+
+```javascript
+omnibusConnection
+  .update({
+    filter: {},
+    update: { Node: 'new_omnihost' },
+  })
+  .then(res => console.log(res));
+```
+
 You can only use one filter expression. AND or OR is not supported. To use more complex queries, see [.sqlFactory](#sqlFactory)
 
 ## Adding records (INSERT)
 
-### .insert(Record)
+### .insert(Fields)
 
-```
-// Create a query
-var query = 'DELETE from alerts.status where Severity = 1';
+Preforms a POST (INSERT) request to the objectserver with required fields query parameter.
 
-// Run Query
-omnibusConnection.query(query,function(err,rows,numrows,coldesc){
-	console.log(rows); // Returns JSON
-});
-```
-
-### PATCH/UPDATE Query
-
-```
-// Create a query
-var query = 'UPDATE alerts.status set Node="Server01" where Node="Server01.domain.com"';
-
-// Run Query
-omnibusConnection.query(query,function(err,rows,numrows,coldesc){
-	console.log(rows); // Returns JSON
-});
+```javascript
+omnibusConnection
+  .insert({
+    Identifier: 'insertNewRowFromNode',
+    Node: 'mynode',
+    Summary: 'Insert from Node',
+    Severity: 5,
+  })
+  .then(res => console.log(res));
 ```
 
-### POST/INSERT Query
+## Working with the model
 
+When creating a connection, a data-model is always fetched from the objectserver. This model is used to create update and insert queries. The model contains all the fields and types in the objectserver.
+
+```javascript
+// alerts.status model
+{
+  "Identifier": "string",
+  "Serial": "integer",
+  "Node": "string",
+  "NodeAlias": "string",
+  "Manager": "string",
+  "Agent": "string",
+  "AlertGroup": "string",
+  ...mode fields
+}
 ```
-// Create a query
-var query = 'INSERT INTO alerts.status (Identifier, Node, Summary, Type) values ("Server01Injected","Server01", "New injected event", 2)';
 
-// Run Query
-omnibusConnection.query(query,function(err,rows,numrows,coldesc){
-	console.log(rows); // Returns JSON
-});
+### .syncModel()
+
+If you during your program execution update the model in the objectserver, the local model must be synced.
+
+```javascript
+// Sync model if changed during program execution
+omnibusConnection.syncModel();
 ```
 
-### Send SQL command to the SQLFactory
+### .getModel()
 
-Make sure the ending ";" is in the SQL command sent to the ObjectServer
+If you need to check the model you can fetch the local copy of the model.
 
+```javascript
+const myModel = omnibusConnection.getModel();
 ```
-// Prepare the command
-var sql = "delete user 'User1';";
 
-// Run the commandFactory
-omnibusConnection.sqlCommand(sql,function(err,rows,numrows,coldesc){
-	console.log(rows); // Returns JSON
-});
+## Working with the connection
+
+### .setAttributes(Parameters)
+
+If you during your program execution need to update any connection parameters.
+
+```javascript
+// update the host parameter for the objectserver
+omnibusConnection.setAttributes({ host: 'new_omnihost' });
+
+// update the host and port parameter for the objectserver
+omnibusConnection.setAttributes({ host: 'new_omnihost', port: '8081' });
+```
+
+_Parameters user, password, host and port are required and cannot be empty_
+
+### .getAttributes()
+
+Returns the current set attributes for the connetion.
+
+```javascript
+// fetch the connection attributes
+const myAttributes = omnibusConnection.getAttributes();
+```
+
+### .setQueryPath(Endpoint)
+
+The default query path (database/table) is set to alerts.status but can easily be changed by the setQueryPath method on the connection object.
+
+```javascript
+// change querypath to alerts.details
+omnibusConnection.setQueryPath('alerts.details');
+```
+
+You can also prepare many different connections with different query path when you create the connection.
+
+```javascript
+const statusDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.status');
+const detailsDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.details');
+const journalDb = omnibus.createConnection(connectionParameters).setQueryPath('alerts.journal');
+
+// print all events
+statusDb.find().then(res => console.log(res));
+// print all details
+detailsDb.find().then(res => console.log(res));
+// print all journals
+journalDb.find().then(res => console.log(res));
+```
+
+### .getUrl()
+
+Returns the last used URL to communicate with the Objectserver
+
+```javascript
+const myURL = omnibusConnection.getUrl();
+```
+
+##Javascript syntax
+
+###Arrow Functions
+This manual uses the new ES6 Arrow functions but if you prefer to use the old style, use the example below
+
+```javascript
+omnibusConnection.find(res => console.log(res)).catch(err => console.log(err));
+```
+
+**Normal Function Example**
+
+```javascript
+omnibusConnection
+  .find(function(res) {
+    console.log(res);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
+```
+
+###Async / Await
+Allthough this manual use .then().catch() for some operations feel free to use async/await where appropriate.
+
+```javascript
+// using .then()
+function getAlertsAlertsStatus() {
+  omnibusConnection.find().then(res, function() {
+    return res;
+  });
+}
+
+// using ES8 async/await
+async function getAlertsStatus() {
+  return await omnibusConnection.find();
+}
 ```
 
 ## Contributing
@@ -347,3 +435,7 @@ IBM Tivoli Netcool OMNIbus is a trademark of International Business Machines Cor
 [npm-url]: https://www.npmjs.com/package/node-omnibus
 [install-size-image]: https://flat.badgen.net/packagephobia/install/node-omnibus
 [install-size-url]: https://packagephobia.now.sh/result?p=node-omnibus
+
+```
+
+```

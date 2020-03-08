@@ -89,9 +89,9 @@ describe('OmnibusQueryGenerator - setQueryPath()', () => {
     }).toThrow('Incorrect Endpoint format : supplied path [alerts_status] is incorrect');
   });
   test('should convert endpoint to correct format', () => {
-    expect(queryGenerator.setQueryPath('alerts.status').getUrl).toMatch('alerts/status');
-    expect(queryGenerator.setQueryPath('alerts/status').getUrl).toMatch('alerts/status');
-    expect(queryGenerator.setQueryPath('').getUrl).toMatch('alerts/status');
+    expect(queryGenerator.setQueryPath('alerts.status').getUrl()).toMatch('alerts/status');
+    expect(queryGenerator.setQueryPath('alerts/status').getUrl()).toMatch('alerts/status');
+    expect(queryGenerator.setQueryPath('').getUrl()).toMatch('alerts/status');
   });
 });
 
@@ -127,7 +127,7 @@ describe('OmnibusQueryGenerator - setAttributes()', () => {
 
     queryGeneratory.setAttributes(expectedParams);
     // test default paramtetrs
-    expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
+    expect(queryGeneratory.getAttributes()).toMatchObject(expectedParams);
     // Change some parameters
     let newParameters: OmnibusConnectionParameters = { host: 'newhost', password: 'newpassword', port: 'newPort' };
     // Update the parameters to test with
@@ -135,7 +135,7 @@ describe('OmnibusQueryGenerator - setAttributes()', () => {
     // set the parameters on the testQuery
     queryGeneratory.setAttributes(newParameters);
     // get them and validate
-    expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
+    expect(queryGeneratory.getAttributes()).toMatchObject(expectedParams);
     // Change other parameters
     newParameters = { SSLEnable: true, SSLRejectUnauthorized: true, port: 'newPort' };
     // Update the parameters to test with
@@ -143,7 +143,7 @@ describe('OmnibusQueryGenerator - setAttributes()', () => {
     // set the parameters on the testQuery
     queryGeneratory.setAttributes(newParameters);
     // get them and validate
-    expect(queryGeneratory.getAttributes).toMatchObject(expectedParams);
+    expect(queryGeneratory.getAttributes()).toMatchObject(expectedParams);
   });
 });
 
@@ -158,13 +158,13 @@ describe('OmnibusQueryGenerator - find()', () => {
   test('url should update with filter,collist and orderby when used', async () => {
     // Test filter
     await queryGenerator.find({ filter: { Node: 'hostname.domain.com' } }).then(res => {
-      expect(queryGenerator.getUrl).toEqual(
+      expect(queryGenerator.getUrl()).toEqual(
         'http://omnihost:8080/objectserver/restapi/alerts/status?filter=Node%3D%27hostname.domain.com%27&collist=&orderby=',
       );
     });
     // Test collist
     await queryGenerator.find({ filter: { Node: 'hostname.domain.com' }, collist: ['Node', 'Summary'] }).then(res => {
-      expect(queryGenerator.getUrl).toEqual(
+      expect(queryGenerator.getUrl()).toEqual(
         'http://omnihost:8080/objectserver/restapi/alerts/status?filter=Node%3D%27hostname.domain.com%27&collist=Node%2CSummary&orderby=',
       );
     });
@@ -172,7 +172,7 @@ describe('OmnibusQueryGenerator - find()', () => {
     await queryGenerator
       .find({ filter: { Node: 'hostname.domain.com' }, collist: ['Node', 'Summary'], orderby: { Node: 'ASC' } })
       .then(res => {
-        expect(queryGenerator.getUrl).toEqual(
+        expect(queryGenerator.getUrl()).toEqual(
           'http://omnihost:8080/objectserver/restapi/alerts/status?filter=Node%3D%27hostname.domain.com%27&collist=Node%2CSummary&orderby=Node+ASC',
         );
       });

@@ -120,11 +120,11 @@ export class OmnibusQueryGenerator {
     return this;
   }
 
-  get getUrl(): string {
+  getUrl(): string {
     return this._url.href;
   }
 
-  async getModel(): Promise<OmnibusModel> {
+  getModel(): Promise<OmnibusModel> {
     if (Object.entries(this._model).length === 0) {
       return Promise.resolve(this.syncModel());
     } else {
@@ -183,7 +183,7 @@ export class OmnibusQueryGenerator {
     return this;
   }
 
-  get getAttributes(): Object {
+  getAttributes(): Object {
     // Returns the parameters for the connection
     return this._parameters;
   }
