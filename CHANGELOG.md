@@ -76,3 +76,7 @@
 ## Version 0.5.4 - March 8, 2020
 
 - Added badges to main documentation
+
+## Version 0.5.5 - March 8, 2020
+
+- New build
