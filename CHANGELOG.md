@@ -67,3 +67,8 @@
 ## Version 0.5.2 - March 8, 2020
 
 - Documentation update
+
+## Version 0.5.3 - March 8, 2020
+
+- Documentation update
+  - Code errors fixed
