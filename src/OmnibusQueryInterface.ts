@@ -1,5 +1,6 @@
 // OmnibusQueryInterface.ts:  File to handle all communication with server via fetch
 import { OmnibusResponse } from './OmnibusQueryGenerator';
+import { RequestInit, RequestInfo, Response } from 'node-fetch';
 
 export class OmnibusQueryInterface {
   constructor(public fetch: Function) {}
@@ -42,7 +43,6 @@ export class OmnibusQueryInterface {
       });
   }
 
-  //{ url: string; status: string | number; statusText: string }
   formatResponse(data: any, error: { url: string; status: string | number; statusText: string } | null): Promise<{}> {
     if (error) {
       return Promise.reject({
