@@ -80,3 +80,10 @@
 ## Version 0.5.5 - March 8, 2020
 
 - New build
+
+## Version 0.5.6 - March 9, 2020
+
+- Fixed problem when using unsigned SSL certificate on the Objectserver
+  - set connection parameter SSLRejectUnauthorized: false
+- Removed unused types in sourcecode
+- Clean up sourcecode
