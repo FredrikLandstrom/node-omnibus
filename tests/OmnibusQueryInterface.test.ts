@@ -1,5 +1,4 @@
 import { OmnibusQueryInterface } from '../src/OmnibusQueryInterface';
-import { resolveModuleName } from 'typescript';
 
 var fs = require('fs');
 

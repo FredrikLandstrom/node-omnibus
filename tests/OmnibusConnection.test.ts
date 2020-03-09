@@ -7,7 +7,6 @@ const omnibusModel = JSON.parse(fs.readFileSync('./tests/datafiles/OMNIbusModel.
 
 const fetchMock = require('fetch-mock').sandbox();
 
-//const omnibusConnection = new OmnibusConnection(fakeFetch, parameters);
 const params = {
   host: 'omnihost',
   user: 'root',

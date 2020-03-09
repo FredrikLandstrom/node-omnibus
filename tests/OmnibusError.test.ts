@@ -11,10 +11,7 @@ describe('OmnibusError Class', () => {
   });
   test('Check if correct message is recieved for a random errortype', () => {
     expect.assertions(3);
-    // random errortype
-
     const randomErrorTypeKey = errorTypeKeys[Math.floor(Math.random() * errorTypeKeys.length)];
-    const errorTypeObject = ErrorTypes[randomErrorTypeKey];
 
     try {
       throwError(randomErrorTypeKey);

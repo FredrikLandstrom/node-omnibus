@@ -1,5 +1,4 @@
 import { OmnibusQueryGenerator, OmnibusConnectionParameters } from '../src/OmnibusQueryGenerator';
-import { isExportDeclaration } from 'typescript';
 var fs = require('fs');
 
 const params = {
@@ -119,7 +118,6 @@ describe('OmnibusQueryGenerator - setAttributes()', () => {
       SSLEnable: false,
       SSLRejectUnauthorized: false,
     };
-    // Empty parameters
 
     expect(() => {
       queryGeneratory.setAttributes();
