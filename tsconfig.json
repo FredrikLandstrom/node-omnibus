@@ -4,9 +4,9 @@
     "target": "ES6",
     "module": "commonjs",
     "declaration": true,
+    "removeComments": true,
     "outDir": "./lib",
-    "strict": true,
-    "typeRoots": ["./src/types", "./node_modules/@types"]
+    "strict": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]
