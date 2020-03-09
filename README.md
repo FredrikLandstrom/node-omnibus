@@ -11,7 +11,7 @@ node-omnibus is a client library for accessing the OMNIbus Objectserver database
 > '[IBM Tivoli Netcool OMNIbus](http://www.ibm.com/software/products/ibmtivolinetcoolomnibus) provides near real-time service assurance for business infrastructure, applications, servers, network devices and protocols, internet protocols, storage and security devices' (from ibm.com)
 
 - [Installation](#installation)
-- [OMNIbus rest configuration](#omnibus-rest-configuration)
+- [OMNIbus REST configuration](#omnibus-rest-configuration)
 - [Usage](#usage)
   - [Creating the connection](#creating-the-connection)
   - [Quick start](#quick-start)
@@ -66,7 +66,7 @@ const connectionParameters = {
   host: 'omnihost', // Required - Objectserver to connect to
   port: '8080', // Required - NHttpd.ListeningPort
   user: 'root', // Required - Objectserver username
-  password: 'password', // Required - Objevtserver password
+  password: 'password', // Required - Objectserver password
   SSLEnable: true, // Requests over https (default: false)
   SSLRejectUnauthorized: false, // Reject request if certificate is invalid (default: true)
 };
