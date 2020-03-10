@@ -87,3 +87,7 @@
   - set connection parameter SSLRejectUnauthorized: false
 - Removed unused types in sourcecode
 - Clean up sourcecode
+
+## Version 0.5.7 - No Date Set, under dev
+
+- Documentation updates
