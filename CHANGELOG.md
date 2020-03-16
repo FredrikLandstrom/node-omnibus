@@ -91,3 +91,4 @@
 ## Version 0.5.7 - No Date Set, under dev
 
 - Documentation updates
+- Dependency security updates (exteral libraries)
