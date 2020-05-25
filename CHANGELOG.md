@@ -88,7 +88,12 @@
 - Removed unused types in sourcecode
 - Clean up sourcecode
 
-## Version 0.5.7 - No Date Set, under dev
+## Version 0.5.7 - April 20, 2020
 
 - Documentation updates
 - Dependency security updates (exteral libraries)
+
+## Version 1.0.0 - May 26, 2020
+
+- Documentation
+- Major version update after production testing
