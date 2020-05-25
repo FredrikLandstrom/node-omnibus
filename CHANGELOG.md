@@ -93,7 +93,7 @@
 - Documentation updates
 - Dependency security updates (exteral libraries)
 
-## Version 1.0.0 - May 26, 2020
+## Version 1.0.1 - May 26, 2020
 
 - Documentation
 - Major version update after production testing
