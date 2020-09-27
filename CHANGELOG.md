@@ -97,3 +97,8 @@
 
 - Documentation
 - Major version update after production testing
+
+## Version 1.0.2 - Sep 27, 2020
+
+- Documentation fixes
+- Update dependent libraries for sourcecode & dev

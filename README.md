@@ -363,7 +363,7 @@ _Parameters user, password, host and port are required and cannot be empty_
 
 ### .getAttributes()
 
-Returns the current set attributes for the connetion.
+Returns the current set attributes for the connection.
 
 ```javascript
 // fetch the connection attributes
