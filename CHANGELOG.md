@@ -102,3 +102,7 @@
 
 - Documentation fixes
 - Update dependent libraries for sourcecode & dev
+
+# Version 1.0.3 - Nov 02, 2020
+
+- Update dependent libraries for sourcecode & dev
