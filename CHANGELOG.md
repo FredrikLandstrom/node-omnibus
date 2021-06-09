@@ -110,3 +110,7 @@
 # Version 1.0.4 - Nov 02, 2020
 
 - New build sourcecode for npm
+
+# Version 1.0.4 - June 09, 2021
+
+- Update dependent libraries for sourcecode & dev
